@@ -7,6 +7,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.board {
+  position: relative;
+}
+
+.knucklebones__p1 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.p1__pp {
+  width: 35%;
+}
+
+.p1__diceholder {
+    width: 200px;
+    height: 100px;
+    border: 2px solid black;
+    margin-left: 12%;
+    margin-bottom: 10%;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
