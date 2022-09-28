@@ -1,11 +1,20 @@
 import React, {useState} from 'react';
-import DiceBoardSquareP1 from './DiceBoardSquareP1';
+import DiceBoardSquare from './DiceBoardSquare';
 import $ from 'jquery';
 
 export default function DiceBoardP1 (props) {
 
 let selected = false;
-let {currentDice, setCurrentDice, columnA, setColumnA, columnB, setColumnB, columnC, setColumnC } = props.dice.diceState;
+let {currentDice, 
+    setCurrentDice, 
+    columnA, 
+    setColumnA, 
+    columnB, 
+    setColumnB, 
+    columnC, 
+    setColumnC,
+    p1Turn,
+    setP1Turn } = props.dice.diceState;
 
 // let [P1DiceArr, setP1DiceArr] = useState([])
 
@@ -22,16 +31,23 @@ let P1DiceArr;
     // Need to make it so that it is recognized only when columns A, B or C are clicked *** RESOLVED ***
 
 // 9-27-22
+    // Keep track of who's turn it is *** RESOLVED ***
     // When it's a player's turn and a square is clicked, the number should fill in the next square in the selected column
     // Give P2's diceholder a dice
     // Alternate between P1's and P2's turn
     // Squares should be arranged in such a way that player 1 cannot add dice to player 2's columns o rvice versa
 
 function setDiceVal(e) {
-    console.log("this: ", e.target.classList.contains("column_A"));
-    if (e.target.classList.contains("column_A") && columnA.length < 3) {
+    console.log("p1Turn: ", p1Turn);
+    if (e.target.classList.contains("column_A") 
+    && columnA.length < 3
+    && p1Turn) {
         setColumnA(prevColumn => {
             return [...prevColumn, currentDice]
+        })
+
+        setP1Turn(prevTurn => {
+            return !prevTurn;
         })
     }
 
@@ -39,9 +55,15 @@ function setDiceVal(e) {
         console.log("columnA: ", columnA);
     }
 
-    if (e.target.classList.contains("column_B") && columnB.length < 3) {
+    if (e.target.classList.contains("column_B") 
+    && columnB.length < 3
+    && p1Turn) {
         setColumnB(prevColumn => {
             return [...prevColumn, currentDice]
+        })
+
+        setP1Turn(prevTurn => {
+            return !prevTurn;
         })
         console.log("column B", columnB);
     }
@@ -50,9 +72,15 @@ function setDiceVal(e) {
         console.log("columnB: ", columnB);
     }
 
-    if (e.target.classList.contains("column_C") && columnC.length < 3) {
+    if (e.target.classList.contains("column_C") 
+    && columnC.length < 3
+    && p1Turn) {
         setColumnC(prevColumn => {
             return [...prevColumn, currentDice]
+        })
+
+        setP1Turn(prevTurn => {
+            return !prevTurn;
         })
         console.log("column C", columnC);
     }
@@ -65,36 +93,15 @@ function setDiceVal(e) {
 }
     return (
         <div className="knucklebones__diceboard__p1">
-            <div className="knucklebones__diceboard__square column_A" 
-            onClick={(event) => setDiceVal(event)}>
-                <h2></h2>
-            </div>
-            <div className="knucklebones__diceboard__square column_B" onClick={(event) => setDiceVal(event)}>
-            
-            </div>
-            <div className="knucklebones__diceboard__square column_C" onClick={(event) => setDiceVal(event)}>
-            
-            </div>
-            
-            <div className="knucklebones__diceboard__square column_A" onClick={(event) => setDiceVal(event)}>
-            
-            </div>
-            <div className="knucklebones__diceboard__square column_B" onClick={(event) => setDiceVal(event)}>
-            
-            </div>
-            <div className="knucklebones__diceboard__square column_C" onClick={(event) => setDiceVal(event)}>
-            
-            </div>
-
-            <div className="knucklebones__diceboard__square column_A" onClick={(event) => setDiceVal(event)}>
-            
-            </div>
-            <div className="knucklebones__diceboard__square column_B" onClick={(event) => setDiceVal(event)}>
-            
-            </div>
-            <div className="knucklebones__diceboard__square column_C" onClick={(event) => setDiceVal(event)}>
-            
-            </div>
+            <DiceBoardSquare column="A" player="1" setDiceVal={setDiceVal}/>
+            <DiceBoardSquare column="B" player="1" setDiceVal={setDiceVal}/>
+            <DiceBoardSquare column="C" player="1" setDiceVal={setDiceVal}/>
+            <DiceBoardSquare column="A" player="1" setDiceVal={setDiceVal}/>
+            <DiceBoardSquare column="B" player="1" setDiceVal={setDiceVal}/>
+            <DiceBoardSquare column="C" player="1" setDiceVal={setDiceVal}/>
+            <DiceBoardSquare column="A" player="1" setDiceVal={setDiceVal}/>
+            <DiceBoardSquare column="B" player="1" setDiceVal={setDiceVal}/>
+            <DiceBoardSquare column="C" player="1" setDiceVal={setDiceVal}/>
         </div>
     )
 }

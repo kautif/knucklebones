@@ -9,6 +9,7 @@ export default function GameBoard () {
     const [columnA, setColumnA] = useState([]);
     const [columnB, setColumnB] = useState([]);
     const [columnC, setColumnC] = useState([]);
+    const [p1Turn, setP1Turn] = useState(true);
 
     let randomVal;
 
@@ -26,7 +27,9 @@ export default function GameBoard () {
             columnB,
             setColumnB,
             columnC,
-            setColumnC
+            setColumnC,
+            p1Turn,
+            setP1Turn
         },
         setRandomVal
     }
