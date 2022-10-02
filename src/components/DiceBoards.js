@@ -7,9 +7,9 @@ export default function DiceBoards (props) {
     console.log("dice: ", props.dice);
     return (
         <div className="knucklebones__diceboard__container">
-            <DiceBoardP2 />
+            <DiceBoardP2 dice={props.dice.p2} />
             <Winner />
-            <DiceBoardP1 dice={props.dice}/>
+            <DiceBoardP1 dice={props.dice.p1}/>
         </div>
     )
 }
