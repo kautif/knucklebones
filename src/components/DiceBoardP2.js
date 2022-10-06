@@ -11,7 +11,11 @@ export default function DiceBoardP2 (props) {
         p2ColumnC, 
         setP2ColumnC,
         p1Turn,
-        setP1Turn } = props.dice.diceState;
+        setP1Turn,
+        p1Roll,
+        setP1Roll } = props.dice.diceState;
+
+    let {setRandomVal} = props.dice.setRandomVal;
 
     let P2DiceArr; 
 
@@ -21,7 +25,8 @@ export default function DiceBoardP2 (props) {
         if (e.target.classList.contains("column_A")
             && e.target.classList.contains("player2")
             && p2ColumnA.length < 3
-            && !p1Turn) {
+            && !p1Turn
+            ) {
             setP2ColumnA(prevColumn => {
                 return [...prevColumn, currentDice]
             })
@@ -29,6 +34,8 @@ export default function DiceBoardP2 (props) {
             setP1Turn(prevTurn => {
                 return !prevTurn;
             })
+
+            // setRandomVal();
         }
     
         if (p2ColumnA.length === 3) {
@@ -38,7 +45,8 @@ export default function DiceBoardP2 (props) {
         if (e.target.classList.contains("column_B") 
             && e.target.classList.contains("player2")
             && p2ColumnB.length < 3
-            && !p1Turn) {
+            && !p1Turn
+            ) {
             setP2ColumnB(prevColumn => {
                 return [...prevColumn, currentDice]
             })
@@ -46,6 +54,8 @@ export default function DiceBoardP2 (props) {
             setP1Turn(prevTurn => {
                 return !prevTurn;
             })
+
+            // setRandomVal();
             // console.log("column B", p2ColumnB);
         }
     
@@ -56,7 +66,8 @@ export default function DiceBoardP2 (props) {
         if (e.target.classList.contains("column_C")
             && e.target.classList.contains("player2")
             && p2ColumnC.length < 3
-            && !p1Turn) {
+            && !p1Turn
+            ) {
             setP2ColumnC(prevColumn => {
                 return [...prevColumn, currentDice]
             })
@@ -64,6 +75,8 @@ export default function DiceBoardP2 (props) {
             setP1Turn(prevTurn => {
                 return !prevTurn;
             })
+
+            // setRandomVal();
             // console.log("column C", p2ColumnC);
         }
     

@@ -14,7 +14,7 @@ export default function Dice () {
     }
 
     return (
-        <div onClick={getDiceVal}>
+        <div>
             <h2 className="knucklebones__dice">{currentDice}</h2>
         </div>
     )

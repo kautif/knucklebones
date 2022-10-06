@@ -9,17 +9,19 @@ export default function GameBoard () {
     const [p1ColumnA, setP1ColumnA] = useState([]);
     const [p1ColumnB, setP1ColumnB] = useState([]);
     const [p1ColumnC, setP1ColumnC] = useState([]);
+
     const [p2ColumnA, setP2ColumnA] = useState([]);
     const [p2ColumnB, setP2ColumnB] = useState([]);
     const [p2ColumnC, setP2ColumnC] = useState([]);
+    
     const [p1Turn, setP1Turn] = useState(true);
+    const [p1Roll, setP1Roll] = useState(true);
 
     let randomVal;
 
     let setRandomVal = () => {
         randomVal = Math.floor(Math.random() * 6) + 1;
         setCurrentDice(randomVal);
-        // setP1Turn(prevTurn => !prevTurn); 
     }
 
     let p1Dice = {
@@ -33,7 +35,9 @@ export default function GameBoard () {
             p1ColumnC,
             setP1ColumnC,
             p1Turn,
-            setP1Turn
+            setP1Turn,
+            p1Roll,
+            setP1Roll
         },
         setRandomVal
     }
@@ -49,7 +53,9 @@ export default function GameBoard () {
             p2ColumnC,
             setP2ColumnC,
             p1Turn,
-            setP1Turn
+            setP1Turn,
+            p1Roll,
+            setP1Roll
         },
         setRandomVal
     }
