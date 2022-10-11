@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import DiceBoardSquare from './DiceBoardSquare';
+import $ from 'jquery';
 
 export default function DiceBoardP2 (props) {
     let {currentDice, 
@@ -35,6 +36,8 @@ export default function DiceBoardP2 (props) {
                 return !prevTurn;
             })
 
+            P2DiceArr = [p2ColumnA, p2ColumnB, p2ColumnC];
+
             // setRandomVal();
         }
     
@@ -55,6 +58,7 @@ export default function DiceBoardP2 (props) {
                 return !prevTurn;
             })
 
+            P2DiceArr = [p2ColumnA, p2ColumnB, p2ColumnC];
             // setRandomVal();
             // console.log("column B", p2ColumnB);
         }
@@ -76,6 +80,7 @@ export default function DiceBoardP2 (props) {
                 return !prevTurn;
             })
 
+            P2DiceArr = [p2ColumnA, p2ColumnB, p2ColumnC];
             // setRandomVal();
             // console.log("column C", p2ColumnC);
         }
@@ -84,9 +89,27 @@ export default function DiceBoardP2 (props) {
             // console.log("columnC: ", p2ColumnC);
         }
     
-        P2DiceArr = [p2ColumnA, p2ColumnB, p2ColumnC];
-        console.log("P2DiceArr: ", P2DiceArr);
+        // P2DiceArr = [p2ColumnA, p2ColumnB, p2ColumnC];
+        // console.log("P2DiceArr: ", P2DiceArr);
     }
+
+    useEffect(() => {
+        // TODO: Clicking on squares to render numbers is not consistent. Use another method or element to trigger
+        if (p2ColumnA[0] !== undefined) {
+            $('.column_A.player2 span')[p2ColumnA.length - 1].innerHTML = p2ColumnA[p2ColumnA.length - 1];
+            // console.log(p2ColumnA[0]);
+        }
+    
+        if (p2ColumnB[0] !== undefined) {
+            $('.column_B.player2 span')[p2ColumnB.length - 1].innerHTML = p2ColumnB[p2ColumnB.length - 1];
+            // console.log(p2ColumnB[0]);
+        }
+    
+        if (p2ColumnC[0] !== undefined) {
+            $('.column_C.player2 span')[p2ColumnC.length - 1].innerHTML = p2ColumnC[p2ColumnC.length - 1];
+            // console.log(p2ColumnA[0]);
+        }
+    }, [p2ColumnA, p2ColumnB, p2ColumnC])
 
     return (
         <div className="knucklebones__diceboard__p2">

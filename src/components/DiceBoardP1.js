@@ -12,14 +12,21 @@ let {currentDice,
     setP1ColumnB, 
     p1ColumnC, 
     setP1ColumnC,
+    p1DiceArr,
+    setP1DiceArr,
     p1Turn,
     setP1Turn,
     p1Roll,
-    setP1Roll } = props.dice.diceState;
+    setP1Roll,
+    p1Score,
+    setP1Score } = props.dice.diceState;
 
-let P1DiceArr = [];
+// let {multiplierCheck} = props.dice.multiplierCheck;
+
+// let P1DiceArr = [];
 
 function setDiceVal(e) {
+    // TODO: Redundant. Consolidate.
     if (e.target.classList.contains("column_A") && 
         e.target.classList.contains("player1") && 
         p1ColumnA.length < 3 
@@ -36,7 +43,11 @@ function setDiceVal(e) {
             return !prevTurn;
         })
 
-        P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC]; 
+        setP1DiceArr(prevDice => {
+            return [...p1ColumnA, ...p1ColumnB, ...p1ColumnC]
+        })
+
+        // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC]; 
 
         // props.dice.setRandomVal();
     }
@@ -57,7 +68,11 @@ function setDiceVal(e) {
             return !prevTurn;
         })
 
-        P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
+        setP1DiceArr(prevDice => {
+            return [...p1ColumnA, ...p1ColumnB, ...p1ColumnC]
+        })
+
+        // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
         // props.dice.setRandomVal();
         // console.log("column B", p1ColumnB);
     }
@@ -79,7 +94,11 @@ function setDiceVal(e) {
             return !prevTurn;
         })
 
-        P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
+        setP1DiceArr(prevDice => {
+            return [...p1ColumnA, ...p1ColumnB, ...p1ColumnC]
+        })
+
+        // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
         // props.dice.setRandomVal();
         // console.log("column C", p1ColumnC);
     }
@@ -91,24 +110,26 @@ function setDiceVal(e) {
 }
 
 useEffect(() => {
+    // TODO: Clicking on squares to render numbers is not consistent. Use another method or element to trigger
     if (p1ColumnA[0] !== undefined) {
-        $('.column_A.player1 h2')[p1ColumnA.length - 1].innerHTML = p1ColumnA[p1ColumnA.length - 1];
+        $('.column_A.player1 span')[p1ColumnA.length - 1].innerHTML = p1ColumnA[p1ColumnA.length - 1];
         // console.log(p1ColumnA[0]);
     }
 
     if (p1ColumnB[0] !== undefined) {
-        $('.column_B.player1 h2')[p1ColumnB.length - 1].innerHTML = p1ColumnB[p1ColumnB.length - 1];
+        $('.column_B.player1 span')[p1ColumnB.length - 1].innerHTML = p1ColumnB[p1ColumnB.length - 1];
         // console.log(p1ColumnB[0]);
     }
 
     if (p1ColumnC[0] !== undefined) {
-        $('.column_C.player1 h2')[p1ColumnC.length - 1].innerHTML = p1ColumnC[p1ColumnC.length - 1];
+        $('.column_C.player1 span')[p1ColumnC.length - 1].innerHTML = p1ColumnC[p1ColumnC.length - 1];
         // console.log(p1ColumnA[0]);
     }
 }, [p1ColumnA, p1ColumnB, p1ColumnC])
 
     return (
         <div className="knucklebones__diceboard__p1">
+            {/* TODO: Redundant. Reduce to 1/3 of the components */}
             <DiceBoardSquare column="A" player="1" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="B" player="1" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="C" player="1" setDiceVal={setDiceVal}/>
