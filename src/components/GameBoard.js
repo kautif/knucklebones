@@ -12,7 +12,6 @@ export default function GameBoard () {
     const [p1ColumnA, setP1ColumnA] = useState([]);
     const [p1ColumnB, setP1ColumnB] = useState([]);
     const [p1ColumnC, setP1ColumnC] = useState([]);
-
     const [p2DiceArr, setP2DiceArr] = useState([]);
     const [p2ColumnA, setP2ColumnA] = useState([]);
     const [p2ColumnB, setP2ColumnB] = useState([]);
@@ -66,12 +65,21 @@ export default function GameBoard () {
             setP1ColumnC,
             p1DiceArr,
             setP1DiceArr,
+            p2ColumnA,
+            setP2ColumnA,
+            p2ColumnB,
+            setP2ColumnB,
+            p2ColumnC,
+            setP2ColumnC,
+            p2DiceArr,
             p1Turn,
             setP1Turn,
             p1Roll,
             setP1Roll,
             p1Score,
-            setP1Score
+            setP1Score,
+            p2Score,
+            setP2Score
         },
         setRandomVal
         // multiplierCheck
@@ -81,16 +89,29 @@ export default function GameBoard () {
         diceState: {
             currentDice,
             setCurrentDice,
+            setP2DiceArr,
+            p2DiceArr,
             p2ColumnA,
             setP2ColumnA,
             p2ColumnB,
             setP2ColumnB,
             p2ColumnC,
             setP2ColumnC,
+            p1ColumnA,
+            setP1ColumnA,
+            p1ColumnB,
+            setP1ColumnB,
+            p1ColumnC,
+            setP1ColumnC,
+            p1DiceArr,
             p1Turn,
             setP1Turn,
             p1Roll,
-            setP1Roll
+            setP1Roll,
+            p1Score,
+            setP1Score,
+            p2Score,
+            setP2Score
         },
         setRandomVal
     }

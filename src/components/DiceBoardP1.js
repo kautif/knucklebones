@@ -14,6 +14,12 @@ let {currentDice,
     setP1ColumnC,
     p1DiceArr,
     setP1DiceArr,
+    p2ColumnA,
+    setP2ColumnA,
+    p2ColumnB,
+    setP2ColumnB,
+    p2ColumnC,
+    setP2ColumnC,
     p1Turn,
     setP1Turn,
     p1Roll,
@@ -108,6 +114,45 @@ function setDiceVal(e) {
     }
 
 }
+
+function removeMatchingVals(column, columnClass, setColumn) {
+    let keptVals = [];
+    let removedVals = [];
+    // 10/15/22 2:33 pm: Removes matching values
+        // When rendering, only removes singular values
+            // If user has two 1s, only removes one of them
+
+        if (column.includes(currentDice)) {
+            for (let i = 0; i < column.length; i++) {
+                $(`.${columnClass} span`)[i].innerHTML = "";
+            }
+        }
+
+        for (let k = 0; k < column.length; k++) {
+            if (currentDice !== column[k]) {
+                    keptVals.push(column[k]);
+                    $(`.${columnClass} span`)[keptVals.length - 1].innerHTML = keptVals[keptVals.length - 1];
+                } else {
+                    removedVals.push(p2ColumnA[k]);
+                }
+        }
+        setColumn(prevCol => {
+            prevCol = keptVals;
+            return keptVals;
+        })
+}
+
+useEffect(() => {
+    removeMatchingVals(p2ColumnA, 'column_A.player2', setP2ColumnA)
+}, [p1ColumnA])
+
+useEffect(() => {
+    removeMatchingVals(p2ColumnB, 'column_B.player2', setP2ColumnB)
+}, [p1ColumnB])
+
+useEffect(() => {
+    removeMatchingVals(p2ColumnC, 'column_C.player2', setP2ColumnC)
+}, [p1ColumnC])
 
 useEffect(() => {
     // TODO: Clicking on squares to render numbers is not consistent. Use another method or element to trigger
