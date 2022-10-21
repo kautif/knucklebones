@@ -25,7 +25,9 @@ let {currentDice,
     p1Roll,
     setP1Roll,
     p1Score,
-    setP1Score } = props.dice.diceState;
+    setP1Score,
+    p2Score,
+    setP2Score } = props.dice.diceState;
 
 // let {multiplierCheck} = props.dice.multiplierCheck;
 
@@ -115,6 +117,9 @@ function setDiceVal(e) {
 
 }
 
+// TODO: Add removeMatchingVals function to player 2s side. Keep testing.
+    // Sometimes, whether matching or not, score is added to player 2's when there should either be no difference or a deduction
+    // 10/19/22 -- 7:53 pm
 function removeMatchingVals(column, columnClass, setColumn) {
     let keptVals = [];
     let removedVals = [];
@@ -133,13 +138,39 @@ function removeMatchingVals(column, columnClass, setColumn) {
                     keptVals.push(column[k]);
                     $(`.${columnClass} span`)[keptVals.length - 1].innerHTML = keptVals[keptVals.length - 1];
                 } else {
-                    removedVals.push(p2ColumnA[k]);
+                    removedVals.push(column[k]);
                 }
         }
         setColumn(prevCol => {
             prevCol = keptVals;
             return keptVals;
         })
+
+        if (removedVals.length === 1) {
+            setP2Score(prevScore => {
+                console.log("prevScore1 CD: ", currentDice);
+                console.log("prevScore1: ", prevScore);
+                return prevScore = prevScore - currentDice;
+            })
+        }
+
+        if (removedVals.length === 2) {
+            setP2Score(prevScore => {
+                console.log("prevScore2 CD: ", currentDice);
+                console.log("prevScore2: ", prevScore);
+                return prevScore = prevScore - ((currentDice * 2) * 2);
+            })
+        }
+
+        if (removedVals.length === 3) {
+            setP2Score(prevScore => {
+                console.log("prevScore3 CD: ", currentDice);
+                console.log("prevScore3: ", prevScore);
+                return prevScore = prevScore - ((currentDice * 3) * 3);
+            })
+        }
+        console.log("currentDice: ", currentDice);
+        console.log("p2Score: ", p2Score);
 }
 
 useEffect(() => {

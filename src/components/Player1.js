@@ -74,7 +74,7 @@ export default function Player1 (props) {
     
     useEffect(() => {
         scoreCheck(p1ColumnA);
-        negateScore();
+        // negateScore();
         // multiplesOf2(p1ColumnA);
         // console.log("column A useEffect: ", p2ColumnA);
     }, [p1ColumnA])

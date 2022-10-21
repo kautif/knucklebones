@@ -11,6 +11,15 @@ export default function DiceBoardP2 (props) {
         setP2ColumnB, 
         p2ColumnC, 
         setP2ColumnC,
+        setP2DiceArr,
+        p1ColumnA,
+        setP1ColumnA,
+        p1ColumnB,
+        setP1ColumnB,
+        p1ColumnC,
+        setP1ColumnC,
+        p1Score,
+        setP1Score,
         p1Turn,
         setP1Turn,
         p1Roll,
@@ -18,38 +27,45 @@ export default function DiceBoardP2 (props) {
 
     let {setRandomVal} = props.dice.setRandomVal;
 
-    let P2DiceArr; 
+    // let P2DiceArr; 
 
+    //  TODO: When setDiceVal is uncommmented, there is an infinite loop of player 1's dice being set on load.
+        // 10/19/22 -- 8:19 pm
     function setDiceVal(e) {
-        // console.log("p1Turn: ", p1Turn);
-        console.log("e: ", e.target.classList);
-        if (e.target.classList.contains("column_A")
-            && e.target.classList.contains("player2")
-            && p2ColumnA.length < 3
+        // TODO: Redundant. Consolidate.
+        if (e.target.classList.contains("column_A") && 
+            e.target.classList.contains("player2") && 
+            p2ColumnA.length < 3 
             && !p1Turn
-            ) {
+             ) {
+    
             setP2ColumnA(prevColumn => {
-                return [...prevColumn, currentDice]
+                if (prevColumn !== undefined) {
+                    return [...prevColumn, currentDice];
+                }
             })
     
             setP1Turn(prevTurn => {
                 return !prevTurn;
             })
-
-            P2DiceArr = [p2ColumnA, p2ColumnB, p2ColumnC];
-
-            // setRandomVal();
+    
+            setP2DiceArr(prevDice => {
+                return [...p2ColumnA, ...p2ColumnB, ...p2ColumnC]
+            })
+    
+            // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC]; 
+    
+            // props.dice.setRandomVal();
         }
     
-        if (p2ColumnA.length === 3) {
-            // console.log("columnA: ", p2ColumnA);
+        if (p1ColumnA.length === 3) {
+            // console.log("columnA: ", p1ColumnA);
         }
     
-        if (e.target.classList.contains("column_B") 
+        if (e.target.classList.contains("column_B")
             && e.target.classList.contains("player2")
-            && p2ColumnB.length < 3
-            && !p1Turn
-            ) {
+            && p1ColumnB.length < 3
+            && !p1Turn) {
             setP2ColumnB(prevColumn => {
                 return [...prevColumn, currentDice]
             })
@@ -57,41 +73,112 @@ export default function DiceBoardP2 (props) {
             setP1Turn(prevTurn => {
                 return !prevTurn;
             })
-
-            P2DiceArr = [p2ColumnA, p2ColumnB, p2ColumnC];
-            // setRandomVal();
-            // console.log("column B", p2ColumnB);
+    
+            setP2DiceArr(prevDice => {
+                return [...p2ColumnA, ...p2ColumnB, ...p2ColumnC]
+            })
+    
+            // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
+            // props.dice.setRandomVal();
+            // console.log("column B", p1ColumnB);
         }
     
-        if (p2ColumnB.length === 3) {
-            // console.log("columnB: ", p2ColumnB);
+        if (p1ColumnB.length === 3) {
+            // console.log("columnB: ", p1ColumnB);
         }
     
         if (e.target.classList.contains("column_C")
             && e.target.classList.contains("player2")
-            && p2ColumnC.length < 3
+            && p1ColumnC.length < 3
             && !p1Turn
             ) {
-            setP2ColumnC(prevColumn => {
+            setP1ColumnC(prevColumn => {
                 return [...prevColumn, currentDice]
             })
     
             setP1Turn(prevTurn => {
                 return !prevTurn;
             })
-
-            P2DiceArr = [p2ColumnA, p2ColumnB, p2ColumnC];
-            // setRandomVal();
-            // console.log("column C", p2ColumnC);
+    
+            setP2DiceArr(prevDice => {
+                return [...p2ColumnA, ...p2ColumnB, ...p2ColumnC]
+            })
+    
+            // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
+            // props.dice.setRandomVal();
+            // console.log("column C", p1ColumnC);
         }
     
         if (p2ColumnA.length === 3) {
-            // console.log("columnC: ", p2ColumnC);
+            // console.log("columnC: ", p1ColumnC);
         }
     
-        // P2DiceArr = [p2ColumnA, p2ColumnB, p2ColumnC];
-        // console.log("P2DiceArr: ", P2DiceArr);
     }
+
+    function removeMatchingVals(column, columnClass, setColumn) {
+        let keptVals = [];
+        let removedVals = [];
+        // 10/15/22 2:33 pm: Removes matching values
+            // When rendering, only removes singular values
+                // If user has two 1s, only removes one of them
+    
+            if (column.includes(currentDice)) {
+                for (let i = 0; i < column.length; i++) {
+                    $(`.${columnClass} span`)[i].innerHTML = "";
+                }
+            }
+    
+            for (let k = 0; k < column.length; k++) {
+                if (currentDice !== column[k]) {
+                        keptVals.push(column[k]);
+                        $(`.${columnClass} span`)[keptVals.length - 1].innerHTML = keptVals[keptVals.length - 1];
+                    } else {
+                        removedVals.push(column[k]);
+                    }
+            }
+            setColumn(prevCol => {
+                prevCol = keptVals;
+                return keptVals;
+            })
+    
+            if (removedVals.length === 1) {
+                setP1Score(prevScore => {
+                    console.log("prevScore1 CD: ", currentDice);
+                    console.log("prevScore1: ", prevScore);
+                    return prevScore = prevScore - currentDice;
+                })
+            }
+    
+            if (removedVals.length === 2) {
+                setP1Score(prevScore => {
+                    console.log("prevScore2 CD: ", currentDice);
+                    console.log("prevScore2: ", prevScore);
+                    return prevScore = prevScore - ((currentDice * 2) * 2);
+                })
+            }
+    
+            if (removedVals.length === 3) {
+                setP1Score(prevScore => {
+                    console.log("prevScore3 CD: ", currentDice);
+                    console.log("prevScore3: ", prevScore);
+                    return prevScore = prevScore - ((currentDice * 3) * 3);
+                })
+            }
+            // console.log("currentDice: ", currentDice);
+            // console.log("p2Score: ", p2Score);
+    }
+    
+    useEffect(() => {
+        removeMatchingVals(p1ColumnA, 'column_A.player1', setP1ColumnA)
+    }, [p2ColumnA])
+    
+    useEffect(() => {
+        removeMatchingVals(p1ColumnB, 'column_B.player1', setP1ColumnB)
+    }, [p2ColumnB])
+    
+    useEffect(() => {
+        removeMatchingVals(p1ColumnC, 'column_C.player1', setP1ColumnC)
+    }, [p2ColumnC])
 
     useEffect(() => {
         // TODO: Clicking on squares to render numbers is not consistent. Use another method or element to trigger
