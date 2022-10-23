@@ -6,6 +6,7 @@ export default function Player1 (props) {
     let {setRandomVal} = props.dice;
 
     function scoreCheck (column) {
+        console.log("scoreCheck");
         // score multipler x3
         if (((column[0] === column[1] && column[0] === column[2]) && column[0] !== undefined))  {
             setP1Score(prevScore => {

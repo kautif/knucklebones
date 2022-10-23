@@ -30,6 +30,11 @@ body {
   position: relative;
 }
 
+.knucklebones__diceboard__column {
+  display: flex;
+  width: 100%;
+}
+
 .knucklebones__diceboard__square span {
   font-size: 1.5em;
   position: absolute;

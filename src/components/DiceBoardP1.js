@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import DiceBoardSquare from './DiceBoardSquare';
 import $ from 'jquery';
+import Column from './Column';
 
 export default function DiceBoardP1 (props) {
 let selected = false;
@@ -31,7 +32,47 @@ let {currentDice,
 
 // let {multiplierCheck} = props.dice.multiplierCheck;
 
-// let P1DiceArr = [];
+function removeMatchingVals (column, columnClass, setColumn) {
+    let keptVals = [];
+    let removedVals = [];
+    if (column.includes(currentDice)) {
+        for (let i = 0; i < column.length; i++) {
+            $(`.${columnClass} span`)[i].innerHTML = "";
+        }
+    }
+
+    for (let k = 0; k < column.length; k++) {
+        if (currentDice !== column[k]) {
+                keptVals.push(column[k]);
+                $(`.${columnClass} span`)[keptVals.length - 1].innerHTML = keptVals[keptVals.length - 1];
+            } else {
+                removedVals.push(column[k]);
+            }
+    }
+
+    setColumn((prevCol) => {
+        prevCol = keptVals;
+        return keptVals;
+    })
+
+    if (removedVals.length === 1) {
+        setP2Score(prevScore => {
+            return prevScore = prevScore - currentDice;
+        })
+    }
+
+    if (removedVals.length === 2) {
+        setP2Score(prevScore => {
+            return prevScore = prevScore - ((currentDice * 2) * 2);
+        })
+    }
+
+    if (removedVals.length === 3) {
+        setP2Score(prevScore => {
+            return prevScore = prevScore - ((currentDice * 3) * 3);
+        })
+    }
+}
 
 function setDiceVal(e) {
     // TODO: Redundant. Consolidate.
@@ -40,6 +81,8 @@ function setDiceVal(e) {
         p1ColumnA.length < 3 
         && p1Turn
          ) {
+
+        removeMatchingVals(p2ColumnA, 'player2.column_A', setP2ColumnA);
 
         setP1ColumnA(prevColumn => {
             if (prevColumn !== undefined) {
@@ -68,6 +111,9 @@ function setDiceVal(e) {
         && e.target.classList.contains("player1")
         && p1ColumnB.length < 3
         && p1Turn) {
+
+        removeMatchingVals(p2ColumnB, 'player2.column_B', setP2ColumnB);
+
         setP1ColumnB(prevColumn => {
             return [...prevColumn, currentDice]
         })
@@ -94,6 +140,9 @@ function setDiceVal(e) {
         && p1ColumnC.length < 3
         && p1Turn
         ) {
+
+        removeMatchingVals(p2ColumnC, 'player2.column_C', setP2ColumnC);
+        
         setP1ColumnC(prevColumn => {
             return [...prevColumn, currentDice]
         })
@@ -120,7 +169,7 @@ function setDiceVal(e) {
 // TODO: Add removeMatchingVals function to player 2s side. Keep testing.
     // Sometimes, whether matching or not, score is added to player 2's when there should either be no difference or a deduction
     // 10/19/22 -- 7:53 pm
-function removeMatchingVals(column, columnClass, setColumn) {
+/* function removeMatchingVals(column, columnClass, setColumn) {
     let keptVals = [];
     let removedVals = [];
     // 10/15/22 2:33 pm: Removes matching values
@@ -171,19 +220,19 @@ function removeMatchingVals(column, columnClass, setColumn) {
         }
         console.log("currentDice: ", currentDice);
         console.log("p2Score: ", p2Score);
-}
+} */
 
 useEffect(() => {
-    removeMatchingVals(p2ColumnA, 'column_A.player2', setP2ColumnA)
-}, [p1ColumnA])
+    // removeMatchingVals(p2ColumnA, 'column_A.player2', setP2ColumnA)
+}, [])
 
 useEffect(() => {
-    removeMatchingVals(p2ColumnB, 'column_B.player2', setP2ColumnB)
-}, [p1ColumnB])
+    // removeMatchingVals(p2ColumnB, 'column_B.player2', setP2ColumnB)
+}, [])
 
 useEffect(() => {
-    removeMatchingVals(p2ColumnC, 'column_C.player2', setP2ColumnC)
-}, [p1ColumnC])
+    // removeMatchingVals(p2ColumnC, 'column_C.player2', setP2ColumnC)
+}, [])
 
 useEffect(() => {
     // TODO: Clicking on squares to render numbers is not consistent. Use another method or element to trigger
@@ -204,8 +253,15 @@ useEffect(() => {
 }, [p1ColumnA, p1ColumnB, p1ColumnC])
 
     return (
+        <div>
+          <Column column="A" player="1" />
+          <Column column="B" player="1" />
+          <Column column="C" player="1" />
+
+
+           {/*
         <div className="knucklebones__diceboard__p1">
-            {/* TODO: Redundant. Reduce to 1/3 of the components */}
+             TODO: Redundant. Reduce to 1/3 of the components 
             <DiceBoardSquare column="A" player="1" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="B" player="1" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="C" player="1" setDiceVal={setDiceVal}/>
@@ -215,6 +271,7 @@ useEffect(() => {
             <DiceBoardSquare column="A" player="1" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="B" player="1" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="C" player="1" setDiceVal={setDiceVal}/>
+        </div> */}
         </div>
     )
 }

@@ -29,6 +29,50 @@ export default function DiceBoardP2 (props) {
 
     // let P2DiceArr; 
 
+    function removeMatchingVals (column, columnClass, setColumn) {
+        let keptVals = [];
+        let removedVals = [];
+        if (column.includes(currentDice)) {
+            for (let i = 0; i < column.length; i++) {
+                $(`.${columnClass} span`)[i].innerHTML = "";
+            }
+        }
+
+        for (let k = 0; k < column.length; k++) {
+            if (currentDice !== column[k]) {
+                    keptVals.push(column[k]);
+                    $(`.${columnClass} span`)[keptVals.length - 1].innerHTML = keptVals[keptVals.length - 1];
+                } else {
+                    removedVals.push(column[k]);
+                }
+        }
+
+        setColumn((prevCol) => {
+            prevCol = keptVals;
+            return keptVals;
+        })
+
+        if (removedVals.length === 1) {
+            setP1Score(prevScore => {
+                return prevScore -= currentDice;
+            })
+        }
+
+        if (removedVals.length === 2) {
+            setP1Score(prevScore => {
+                return prevScore = prevScore - ((currentDice * 2) * 2);
+            })
+        }
+
+        if (removedVals.length === 3) {
+            setP1Score(prevScore => {
+                return prevScore = prevScore - ((currentDice * 3) * 3);
+            })
+        }
+
+        console.log(columnClass, column);
+    }
+
     //  TODO: When setDiceVal is uncommmented, there is an infinite loop of player 1's dice being set on load.
         // 10/19/22 -- 8:19 pm
     function setDiceVal(e) {
@@ -38,7 +82,8 @@ export default function DiceBoardP2 (props) {
             p2ColumnA.length < 3 
             && !p1Turn
              ) {
-    
+            removeMatchingVals(p1ColumnA, 'player1.column_A', setP1ColumnA);
+
             setP2ColumnA(prevColumn => {
                 if (prevColumn !== undefined) {
                     return [...prevColumn, currentDice];
@@ -66,6 +111,9 @@ export default function DiceBoardP2 (props) {
             && e.target.classList.contains("player2")
             && p1ColumnB.length < 3
             && !p1Turn) {
+
+            removeMatchingVals(p1ColumnB, 'player1.column_B', setP1ColumnB);
+
             setP2ColumnB(prevColumn => {
                 return [...prevColumn, currentDice]
             })
@@ -92,7 +140,10 @@ export default function DiceBoardP2 (props) {
             && p1ColumnC.length < 3
             && !p1Turn
             ) {
-            setP1ColumnC(prevColumn => {
+
+            removeMatchingVals(p1ColumnC, 'player1.column_C', setP1ColumnC);
+
+            setP2ColumnC(prevColumn => {
                 return [...prevColumn, currentDice]
             })
     
@@ -115,7 +166,7 @@ export default function DiceBoardP2 (props) {
     
     }
 
-    function removeMatchingVals(column, columnClass, setColumn) {
+ /*   function removeMatchingVals(column, columnClass, setColumn) {
         let keptVals = [];
         let removedVals = [];
         // 10/15/22 2:33 pm: Removes matching values
@@ -166,19 +217,19 @@ export default function DiceBoardP2 (props) {
             }
             // console.log("currentDice: ", currentDice);
             // console.log("p2Score: ", p2Score);
-    }
+    } */
     
     useEffect(() => {
-        removeMatchingVals(p1ColumnA, 'column_A.player1', setP1ColumnA)
-    }, [p2ColumnA])
+        // removeMatchingVals(p1ColumnA, 'column_A.player1', setP1ColumnA)
+    }, [])
     
     useEffect(() => {
-        removeMatchingVals(p1ColumnB, 'column_B.player1', setP1ColumnB)
-    }, [p2ColumnB])
+        // removeMatchingVals(p1ColumnB, 'column_B.player1', setP1ColumnB)
+    }, [])
     
     useEffect(() => {
-        removeMatchingVals(p1ColumnC, 'column_C.player1', setP1ColumnC)
-    }, [p2ColumnC])
+        // removeMatchingVals(p1ColumnC, 'column_C.player1', setP1ColumnC)
+    }, [])
 
     useEffect(() => {
         // TODO: Clicking on squares to render numbers is not consistent. Use another method or element to trigger
