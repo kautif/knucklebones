@@ -1,6 +1,9 @@
+// TODO: In GameBoard, instead of making two distinct DiceBoard player components, have two instances of a single Diceboard player component
+
 import React, {useEffect} from 'react';
 import DiceBoardSquare from './DiceBoardSquare';
 import $ from 'jquery';
+import Column from './Column';
 
 export default function DiceBoardP2 (props) {
     let {currentDice, 
@@ -11,6 +14,7 @@ export default function DiceBoardP2 (props) {
         setP2ColumnB, 
         p2ColumnC, 
         setP2ColumnC,
+        p2DiceArr,
         setP2DiceArr,
         p1ColumnA,
         setP1ColumnA,
@@ -82,7 +86,7 @@ export default function DiceBoardP2 (props) {
             p2ColumnA.length < 3 
             && !p1Turn
              ) {
-            removeMatchingVals(p1ColumnA, 'player1.column_A', setP1ColumnA);
+            // removeMatchingVals(p1ColumnA, 'player1.column_A', setP1ColumnA);
 
             setP2ColumnA(prevColumn => {
                 if (prevColumn !== undefined) {
@@ -95,7 +99,7 @@ export default function DiceBoardP2 (props) {
             })
     
             setP2DiceArr(prevDice => {
-                return [...p2ColumnA, ...p2ColumnB, ...p2ColumnC]
+                return [p2ColumnA, p2ColumnB, p2ColumnC]
             })
     
             // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC]; 
@@ -112,7 +116,7 @@ export default function DiceBoardP2 (props) {
             && p1ColumnB.length < 3
             && !p1Turn) {
 
-            removeMatchingVals(p1ColumnB, 'player1.column_B', setP1ColumnB);
+            // removeMatchingVals(p1ColumnB, 'player1.column_B', setP1ColumnB);
 
             setP2ColumnB(prevColumn => {
                 return [...prevColumn, currentDice]
@@ -123,7 +127,7 @@ export default function DiceBoardP2 (props) {
             })
     
             setP2DiceArr(prevDice => {
-                return [...p2ColumnA, ...p2ColumnB, ...p2ColumnC]
+                return [p2ColumnA, p2ColumnB, p2ColumnC]
             })
     
             // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
@@ -141,7 +145,7 @@ export default function DiceBoardP2 (props) {
             && !p1Turn
             ) {
 
-            removeMatchingVals(p1ColumnC, 'player1.column_C', setP1ColumnC);
+            // removeMatchingVals(p1ColumnC, 'player1.column_C', setP1ColumnC);
 
             setP2ColumnC(prevColumn => {
                 return [...prevColumn, currentDice]
@@ -152,7 +156,7 @@ export default function DiceBoardP2 (props) {
             })
     
             setP2DiceArr(prevDice => {
-                return [...p2ColumnA, ...p2ColumnB, ...p2ColumnC]
+                return [p2ColumnA, p2ColumnB, p2ColumnC]
             })
     
             // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
@@ -234,23 +238,28 @@ export default function DiceBoardP2 (props) {
     useEffect(() => {
         // TODO: Clicking on squares to render numbers is not consistent. Use another method or element to trigger
         if (p2ColumnA[0] !== undefined) {
-            $('.column_A.player2 span')[p2ColumnA.length - 1].innerHTML = p2ColumnA[p2ColumnA.length - 1];
+            // $('.column_A.player2 span')[p2ColumnA.length - 1].innerHTML = p2ColumnA[p2ColumnA.length - 1];
             // console.log(p2ColumnA[0]);
         }
     
         if (p2ColumnB[0] !== undefined) {
-            $('.column_B.player2 span')[p2ColumnB.length - 1].innerHTML = p2ColumnB[p2ColumnB.length - 1];
+            // $('.column_B.player2 span')[p2ColumnB.length - 1].innerHTML = p2ColumnB[p2ColumnB.length - 1];
             // console.log(p2ColumnB[0]);
         }
     
         if (p2ColumnC[0] !== undefined) {
-            $('.column_C.player2 span')[p2ColumnC.length - 1].innerHTML = p2ColumnC[p2ColumnC.length - 1];
+            // $('.column_C.player2 span')[p2ColumnC.length - 1].innerHTML = p2ColumnC[p2ColumnC.length - 1];
             // console.log(p2ColumnA[0]);
         }
     }, [p2ColumnA, p2ColumnB, p2ColumnC])
 
     return (
-        <div className="knucklebones__diceboard__p2">
+        <div className='knucklebones__diceboard__column__container'>
+            <Column column="A" player="2" setDiceVal={setDiceVal} diceArr={p2ColumnA}/>
+            <Column column="B" player="2" setDiceVal={setDiceVal} diceArr={p2ColumnB} />
+            <Column column="C" player="2" setDiceVal={setDiceVal} diceArr={p2ColumnC} />
+
+        {/*<div className="knucklebones__diceboard__p2">
             <DiceBoardSquare column="A" player="2" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="B" player="2" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="C" player="2" setDiceVal={setDiceVal}/>
@@ -260,6 +269,7 @@ export default function DiceBoardP2 (props) {
             <DiceBoardSquare column="A" player="2" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="B" player="2" setDiceVal={setDiceVal}/>
             <DiceBoardSquare column="C" player="2" setDiceVal={setDiceVal}/>
+    </div> */}
         </div>
     )
 }

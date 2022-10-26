@@ -6,9 +6,10 @@ import Winner from './Winner';
 export default function DiceBoards (props) {
     return (
         <div className="knucklebones__diceboard__container">
-            <DiceBoardP2 dice={props.dice.p2} />
+            {/* <DiceBoardP2 dice={props.dice.p2} /> */}
+            <DiceBoardP1 dice={props.dice.p2} player="2" />
             <Winner />
-            <DiceBoardP1 dice={props.dice.p1}/>
+            <DiceBoardP1 dice={props.dice.p1} player="1" />
         </div>
     )
 }

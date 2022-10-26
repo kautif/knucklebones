@@ -28,11 +28,18 @@ body {
 
 .knucklebones__diceboard__square {
   position: relative;
+  width: 100%;
+}
+
+.knucklebones__diceboard__column__container {
+  display: flex;
 }
 
 .knucklebones__diceboard__column {
   display: flex;
+  flex-direction: column;
   width: 100%;
+  z-index: 99;
 }
 
 .knucklebones__diceboard__square span {

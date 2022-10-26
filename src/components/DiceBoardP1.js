@@ -21,6 +21,8 @@ let {currentDice,
     setP2ColumnB,
     p2ColumnC,
     setP2ColumnC,
+    p2DiceArr,
+    setP2DiceArr,
     p1Turn,
     setP1Turn,
     p1Roll,
@@ -30,21 +32,58 @@ let {currentDice,
     p2Score,
     setP2Score } = props.dice.diceState;
 
-// let {multiplierCheck} = props.dice.multiplierCheck;
+function renderColumn (colLetter, setColumn, playerNum, colArr, setPlayerDice) {
+    return (
+        <Column 
+            column={colLetter} 
+            setColumn={setColumn} 
+            player={playerNum} 
+            setDiceVal={setDiceVal} 
+            colArr={colArr} 
+            diceArr={setPlayerDice} 
+        />
+    )    
+}
 
-function removeMatchingVals (column, columnClass, setColumn) {
+function aggregateColumns () {
+    if (props.player === "1") {
+        return (
+            <div className='knucklebones__diceboard__column__container'>
+                {renderColumn("A", setP1ColumnA, props.player, p1ColumnA, setP1DiceArr)}
+                {renderColumn("B", setP1ColumnB, props.player, p1ColumnB, setP1DiceArr)}
+                {renderColumn("C", setP1ColumnC, props.player, p1ColumnC, setP1DiceArr)}
+            </div>
+        )
+    }
+
+    if (props.player === "2") {
+        return (
+            <div className='knucklebones__diceboard__column__container'>
+                {renderColumn("A", setP2ColumnA, props.player, p2ColumnA, setP2DiceArr)}
+                {renderColumn("B", setP2ColumnB, props.player, p2ColumnB, setP2DiceArr)}
+                {renderColumn("C", setP2ColumnC, props.player, p2ColumnC, setP2DiceArr)}
+            </div>
+        )
+    }
+}
+
+function removeMatchingVals (column, setColumn) {
     let keptVals = [];
     let removedVals = [];
-    if (column.includes(currentDice)) {
-        for (let i = 0; i < column.length; i++) {
-            $(`.${columnClass} span`)[i].innerHTML = "";
-        }
-    }
+    setColumn((prevColumn) => {
+        return []
+    })
+
+    // if (column.includes(currentDice)) {
+    //     for (let i = 0; i < column.length; i++) {
+    //         $(`.${columnClass} span`)[i].innerHTML = "";
+    //     }
+    // }
 
     for (let k = 0; k < column.length; k++) {
         if (currentDice !== column[k]) {
                 keptVals.push(column[k]);
-                $(`.${columnClass} span`)[keptVals.length - 1].innerHTML = keptVals[keptVals.length - 1];
+                // $(`.${columnClass} span`)[keptVals.length - 1].innerHTML = keptVals[keptVals.length - 1];
             } else {
                 removedVals.push(column[k]);
             }
@@ -57,13 +96,14 @@ function removeMatchingVals (column, columnClass, setColumn) {
 
     if (removedVals.length === 1) {
         setP2Score(prevScore => {
-            return prevScore = prevScore - currentDice;
+            console.log("prevScore: ", prevScore);
+            return prevScore -= (currentDice);
         })
     }
 
     if (removedVals.length === 2) {
         setP2Score(prevScore => {
-            return prevScore = prevScore - ((currentDice * 2) * 2);
+            return prevScore -= (currentDice * 2) * 2;
         })
     }
 
@@ -74,17 +114,16 @@ function removeMatchingVals (column, columnClass, setColumn) {
     }
 }
 
-function setDiceVal(e) {
+function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
     // TODO: Redundant. Consolidate.
-    if (e.target.classList.contains("column_A") && 
-        e.target.classList.contains("player1") && 
-        p1ColumnA.length < 3 
+    if (e.target.parentElement.classList.contains(`column_${column}`) && 
+        e.target.parentElement.classList.contains(`player1`) && 
+        playerCol.length < 3 
         && p1Turn
          ) {
+        // removeMatchingVals(p2ColumnA, 'player2.column_A', setP2ColumnA);
 
-        removeMatchingVals(p2ColumnA, 'player2.column_A', setP2ColumnA);
-
-        setP1ColumnA(prevColumn => {
+        setColumn(prevColumn => {
             if (prevColumn !== undefined) {
                 return [...prevColumn, currentDice];
             }
@@ -94,77 +133,131 @@ function setDiceVal(e) {
             return !prevTurn;
         })
 
-        setP1DiceArr(prevDice => {
-            return [...p1ColumnA, ...p1ColumnB, ...p1ColumnC]
+        if (player === "1") {
+            setDiceArr(prevDice => {
+                return [p1ColumnA, p1ColumnB, p1ColumnC]
+            })
+        }
+
+        if (player === "2") {
+            // setDiceArr(prevDice => {
+            //     return [p2ColumnA, p2ColumnB, p2ColumnC]
+            // })
+        }
+    } 
+
+    if (e.target.parentElement.classList.contains(`column_${column}`) && 
+        e.target.parentElement.classList.contains(`player2`) && 
+        playerCol.length < 3 
+        && !p1Turn) {
+        setColumn(prevColumn => {
+            if (prevColumn !== undefined) {
+                return [...prevColumn, currentDice];
+            }
         })
 
-        // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC]; 
+        setP1Turn(prevTurn => {
+            return !prevTurn;
+        })
 
-        // props.dice.setRandomVal();
+        setP2DiceArr(prevDice => {
+            return [p2ColumnA, p2ColumnB, p2ColumnC]
+        })
     }
 
-    if (p1ColumnA.length === 3) {
+    if (playerCol.length === 3) {
         // console.log("columnA: ", p1ColumnA);
     }
-
-    if (e.target.classList.contains("column_B")
-        && e.target.classList.contains("player1")
-        && p1ColumnB.length < 3
-        && p1Turn) {
-
-        removeMatchingVals(p2ColumnB, 'player2.column_B', setP2ColumnB);
-
-        setP1ColumnB(prevColumn => {
-            return [...prevColumn, currentDice]
-        })
-
-        setP1Turn(prevTurn => {
-            return !prevTurn;
-        })
-
-        setP1DiceArr(prevDice => {
-            return [...p1ColumnA, ...p1ColumnB, ...p1ColumnC]
-        })
-
-        // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
-        // props.dice.setRandomVal();
-        // console.log("column B", p1ColumnB);
-    }
-
-    if (p1ColumnB.length === 3) {
-        // console.log("columnB: ", p1ColumnB);
-    }
-
-    if (e.target.classList.contains("column_C")
-        && e.target.classList.contains("player1")
-        && p1ColumnC.length < 3
-        && p1Turn
-        ) {
-
-        removeMatchingVals(p2ColumnC, 'player2.column_C', setP2ColumnC);
-        
-        setP1ColumnC(prevColumn => {
-            return [...prevColumn, currentDice]
-        })
-
-        setP1Turn(prevTurn => {
-            return !prevTurn;
-        })
-
-        setP1DiceArr(prevDice => {
-            return [...p1ColumnA, ...p1ColumnB, ...p1ColumnC]
-        })
-
-        // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
-        // props.dice.setRandomVal();
-        // console.log("column C", p1ColumnC);
-    }
-
-    if (p1ColumnA.length === 3) {
-        // console.log("columnC: ", p1ColumnC);
-    }
-
 }
+
+// function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
+//     // TODO: Redundant. Consolidate.
+//     if (e.target.parentElement.classList.contains("column_A") && 
+//         e.target.parentElement.classList.contains("player1") && 
+//         p1ColumnA.length < 3 
+//         && p1Turn
+//          ) {
+
+//         // removeMatchingVals(p2ColumnA, 'player2.column_A', setP2ColumnA);
+
+//         setP1ColumnA(prevColumn => {
+//             if (prevColumn !== undefined) {
+//                 return [...prevColumn, currentDice];
+//             }
+//         })
+
+//         setP1Turn(prevTurn => {
+//             return !prevTurn;
+//         })
+
+//         setP1DiceArr(prevDice => {
+//             return [p1ColumnA, p1ColumnB, p1ColumnC]
+//         })
+//         console.log("P1DiceArr: ", p1DiceArr);
+//     }
+
+//     if (p1ColumnA.length === 3) {
+//         // console.log("columnA: ", p1ColumnA);
+//     }
+
+//     if (e.target.parentElement.classList.contains("column_B")
+//         && e.target.parentElementclassList.contains("player1")
+//         && p1ColumnB.length < 3
+//         && p1Turn) {
+
+//         // removeMatchingVals(p2ColumnB, 'player2.column_B', setP2ColumnB);
+
+//         setP1ColumnB(prevColumn => {
+//             return [...prevColumn, currentDice]
+//         })
+
+//         setP1Turn(prevTurn => {
+//             return !prevTurn;
+//         })
+
+//         setP1DiceArr(prevDice => {
+//             return [...p1ColumnA, ...p1ColumnB, ...p1ColumnC]
+//         })
+
+//         // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
+//         // props.dice.setRandomVal();
+//         // console.log("column B", p1ColumnB);
+//     }
+
+//     if (p1ColumnB.length === 3) {
+//         // console.log("columnB: ", p1ColumnB);
+//     }
+
+//     if (e.target.parentElement.classList.contains("column_C")
+//         && e.target.parentElement.classList.contains("player1")
+//         && p1ColumnC.length < 3
+//         && p1Turn
+//         ) {
+
+//         removeMatchingVals(p2ColumnC, 'player2.column_C', setP2ColumnC);
+        
+//         setP1ColumnC(prevColumn => {
+//             return [...prevColumn, currentDice]
+//         })
+
+//         setP1Turn(prevTurn => {
+//             return !prevTurn;
+//         })
+
+//         setP1DiceArr(prevDice => {
+//             return [...p1ColumnA, ...p1ColumnB, ...p1ColumnC]
+//         })
+
+//         // P1DiceArr = [p1ColumnA, p1ColumnB, p1ColumnC];
+//         // props.dice.setRandomVal();
+//         // console.log("column C", p1ColumnC);
+//     }
+
+//     if (p1ColumnA.length === 3) {
+//         // console.log("columnC: ", p1ColumnC);
+//     }
+
+// }
 
 // TODO: Add removeMatchingVals function to player 2s side. Keep testing.
     // Sometimes, whether matching or not, score is added to player 2's when there should either be no difference or a deduction
@@ -223,8 +316,9 @@ function setDiceVal(e) {
 } */
 
 useEffect(() => {
-    // removeMatchingVals(p2ColumnA, 'column_A.player2', setP2ColumnA)
-}, [])
+    removeMatchingVals(p2ColumnA, setP2ColumnA)
+    console.log("p1A changed: ", p1ColumnA);
+}, [p1ColumnA])
 
 useEffect(() => {
     // removeMatchingVals(p2ColumnB, 'column_B.player2', setP2ColumnB)
@@ -237,41 +331,22 @@ useEffect(() => {
 useEffect(() => {
     // TODO: Clicking on squares to render numbers is not consistent. Use another method or element to trigger
     if (p1ColumnA[0] !== undefined) {
-        $('.column_A.player1 span')[p1ColumnA.length - 1].innerHTML = p1ColumnA[p1ColumnA.length - 1];
+        // $('.column_A.player1 span')[p1ColumnA.length - 1].innerHTML = p1ColumnA[p1ColumnA.length - 1];
         // console.log(p1ColumnA[0]);
     }
 
     if (p1ColumnB[0] !== undefined) {
-        $('.column_B.player1 span')[p1ColumnB.length - 1].innerHTML = p1ColumnB[p1ColumnB.length - 1];
+        // $('.column_B.player1 span')[p1ColumnB.length - 1].innerHTML = p1ColumnB[p1ColumnB.length - 1];
         // console.log(p1ColumnB[0]);
     }
 
     if (p1ColumnC[0] !== undefined) {
-        $('.column_C.player1 span')[p1ColumnC.length - 1].innerHTML = p1ColumnC[p1ColumnC.length - 1];
+        // $('.column_C.player1 span')[p1ColumnC.length - 1].innerHTML = p1ColumnC[p1ColumnC.length - 1];
         // console.log(p1ColumnA[0]);
     }
 }, [p1ColumnA, p1ColumnB, p1ColumnC])
 
     return (
-        <div>
-          <Column column="A" player="1" />
-          <Column column="B" player="1" />
-          <Column column="C" player="1" />
-
-
-           {/*
-        <div className="knucklebones__diceboard__p1">
-             TODO: Redundant. Reduce to 1/3 of the components 
-            <DiceBoardSquare column="A" player="1" setDiceVal={setDiceVal}/>
-            <DiceBoardSquare column="B" player="1" setDiceVal={setDiceVal}/>
-            <DiceBoardSquare column="C" player="1" setDiceVal={setDiceVal}/>
-            <DiceBoardSquare column="A" player="1" setDiceVal={setDiceVal}/>
-            <DiceBoardSquare column="B" player="1" setDiceVal={setDiceVal}/>
-            <DiceBoardSquare column="C" player="1" setDiceVal={setDiceVal}/>
-            <DiceBoardSquare column="A" player="1" setDiceVal={setDiceVal}/>
-            <DiceBoardSquare column="B" player="1" setDiceVal={setDiceVal}/>
-            <DiceBoardSquare column="C" player="1" setDiceVal={setDiceVal}/>
-        </div> */}
-        </div>
+        aggregateColumns()
     )
 }
