@@ -1,11 +1,14 @@
 // TODO: In GameBoard, instead of making two distinct DiceBoard player components, have two instances of a single Diceboard player component
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
+import BoardContext from '../BoardContext';
 import DiceBoardSquare from './DiceBoardSquare';
 import $ from 'jquery';
-import Column from './Column';
+import Column from './Column'; 
 
 export default function DiceBoardP2 (props) {
+    const { dice } = useContext(BoardContext);
+
     let {currentDice, 
         setCurrentDice, 
         p2ColumnA, 
