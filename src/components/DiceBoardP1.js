@@ -13,12 +13,14 @@ const { setP1ColumnA,
         setP1ColumnC, 
         p1ColumnC, 
         setP1DiceArr,
+        // p1AllVals,
+        // setP1AllVals,
         setP1Score,
         currentDice,
         setP1Turn,
         p1Turn } = dice.p1Dice.diceState;
 
-const { removeP2MatchingVals, removeP1MatchingVals, scoreCheck, reduceScore } = dice.p1Dice;
+const { removeP2MatchingVals, removeP1MatchingVals, scoreCheck, reduceScore, checkWinner } = dice.p1Dice;
 
 const { setP2ColumnA, 
         p2ColumnA, 
@@ -28,6 +30,7 @@ const { setP2ColumnA,
         p2ColumnC,
         setP2DiceArr,
         setP2Score } = dice.p2Dice.diceState;
+        
 function renderColumn (colLetter, setColumn, playerNum, colArr, setPlayerDice) {
     return (
         <Column 
@@ -71,11 +74,10 @@ function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
         && p1Turn
          ) {
         // removeMatchingVals(p2ColumnA, setP2ColumnA, setP2Score);
-
-        console.log("setDiceVal",column);
-
+            // checkWinner(p2ColumnA, p2ColumnB, p2ColumnC);
         setColumn(prevColumn => {
             console.log("setColumn", prevColumn);
+
             if (prevColumn !== undefined) {
                 const newColumn = [...prevColumn, currentDice];
                 scoreCheck(newColumn, setP1Score);
@@ -95,17 +97,11 @@ function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
             return !prevTurn;
         })
 
-        if (player === "1") {
-            setDiceArr(prevDice => {
-                return [p1ColumnA, p1ColumnB, p1ColumnC]
-            })
-        }
-
-        if (player === "2") {
-            setDiceArr(prevDice => {
-                return [p2ColumnA, p2ColumnB, p2ColumnC]
-            })
-        }
+        setDiceArr(prevDice => {
+            return [p1ColumnA, p1ColumnB, p1ColumnC]
+        })
+ 
+        // console.log("DBP1: ", p1AllVals.length);
     } 
 
     if (e.target.parentElement.classList.contains(`column_${column}`) && 
@@ -113,7 +109,6 @@ function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
         playerCol.length < 3 
         && !p1Turn) {
             // removeMatchingVals(p1ColumnA, setP1ColumnA, setP1Score);
-
         setColumn(prevColumn => {
             if (prevColumn !== undefined) {
                 const newColumn = [...prevColumn, currentDice];
@@ -138,37 +133,7 @@ function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
             return [p2ColumnA, p2ColumnB, p2ColumnC]
         })
     }
-
-    if (playerCol.length === 3) {
-        // console.log("columnA: ", p1ColumnA);
-    }
 }
-
-useEffect(() => {
-    console.log("p1ColumnA", p1ColumnA);
-    // scoreCheck(p1ColumnA, setP1Score);
-    // removeMatchingVals(p2ColumnA, setP2ColumnA, setP2Score);
-}, [p1ColumnA])
-
-useEffect(() => {
-    // scoreCheck(p1ColumnB, setP1Score);
-}, [p1ColumnB])
-
-useEffect(() => {
-    // scoreCheck(p1ColumnC, setP1Score);
-}, [p1ColumnC])
-
-useEffect(() => {
-    // scoreCheck(p2ColumnA, setP2Score);
-}, [p2ColumnA])
-
-useEffect(() => {
-    // scoreCheck(p2ColumnB, setP2Score);
-}, [p2ColumnB])
-
-useEffect(() => {
-    // scoreCheck(p2ColumnC, setP2Score);
-}, [p2ColumnC])
 
     return (
         <div>

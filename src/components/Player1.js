@@ -1,14 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useContext} from 'react';
 import BoardContext from '../BoardContext';
 import $ from 'jquery';
 
 export default function Player1 (props) {
-    // let {p1Turn, currentDice, p1ColumnA, p1ColumnB, p1ColumnC, p1Score, p2ColumnA, setP2ColumnA, p2ColumnB, p2ColumnC, setP1Score, setP2Score } = props.dice.diceState;
-    // let {setRandomVal} = props.dice;
-
     const { dice } = useContext(BoardContext);
     console.log("p1 dice: ", dice);
-    const { setP1Score, currentDice, p1ColumnA, p1ColumnB, p1ColumnC, p1Score, p1Turn } = dice.p1Dice.diceState;
+    const { currentDice, p1Score, p1Turn } = dice.p1Dice.diceState;
     const { setRandomVal } = dice.p1Dice;
     return (
         <div className="knucklebones__p1">

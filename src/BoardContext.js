@@ -3,12 +3,14 @@ import React, { createContext, useState } from "react";
 const BoardContext = createContext();
 
 export function BoardProvider ({children}) {
+    const [gameOver, setGameOver] = useState(false);
     const [currentDice, setCurrentDice] = useState(0);
 
     const [p1ColumnA, setP1ColumnA] = useState([]);
     const [p1ColumnB, setP1ColumnB] = useState([]);
     const [p1ColumnC, setP1ColumnC] = useState([]);
     const [p1DiceArr, setP1DiceArr] = useState([]);
+    const [p1AllVals, setP1AllVals] = useState([]);
     const [p2DiceArr, setP2DiceArr] = useState([]);
     const [p2ColumnA, setP2ColumnA] = useState([]);
     const [p2ColumnB, setP2ColumnB] = useState([]);
@@ -19,6 +21,7 @@ export function BoardProvider ({children}) {
 
     const [p1Score, setP1Score] = useState(0);
     const [p2Score, setP2Score] = useState(0);
+    let [winner, setWinner] = useState("");
 
     let randomVal;
 
@@ -126,64 +129,24 @@ export function BoardProvider ({children}) {
         }
     }
 
-    // function removeMatchingVals (column, setColumn, setPScore) {
-    //     let keptVals = [];
-    //     let removedVals = [];
-    //     let newScore;
-    //     setColumn(prevColumn => { return [] })
-    
-    //     for (let k = 0; k < column.length; k++) {
-    //         if (currentDice !== column[k]) {
-    //                 keptVals.push(column[k]);
-    //                 // $(`.${columnClass} span`)[keptVals.length - 1].innerHTML = keptVals[keptVals.length - 1];
-    //             } else {
-    //                 removedVals.push(column[k]);
-    //             }
-    //     }
-    
-    //     setColumn(prevCol => {
-    //         prevCol = keptVals;
-    //         return keptVals;
-    //     })
-    
-    //     if (removedVals.length === 1) {
-    //         setPScore((prevScore) => {
-    //             prevScore -= (currentDice);
-    //             newScore = prevScore
-    //             return newScore;
-    //         })
-    //     }
-    
-    //     if (removedVals.length === 2) {
-    //         setPScore((prevScore) => {
-    //             prevScore -= (currentDice * 2) * 2;
-    //             newScore = prevScore;
-    //             return newScore;
-    //         })
-    //     }
-    
-    //     if (removedVals.length === 3) {
-    //         setPScore((prevScore) => {
-    //             prevScore -= (currentDice * 3) * 3;
-    //             newScore = prevScore;
-    //             return newScore
-    //         })
-    //     }
-    // }
- 
-    // let multiplierCheck = (playerArr) => {
-    //     for (let i = 0; i < playerArr.length; i++) {
-    //         for (let k = 0; k < playerArr[i].length; k++) {
-    //             if (currentDice !== playerArr[i][k]) {
-    //                 setP1Score(prevScore => {
-    //                     console.log("prevScore: ", prevScore);
-    //                     return prevScore += currentDice;
-    //                 })
-    //             }
-    //         }
-    //     }
-    //     // console.log("P1Score: ", p1Score);
-    // }
+    function checkWinner () {
+        if (p1Score > p2Score) {
+            console.log("Player 1 Wins");
+            setWinner(prevPlayer => {
+                winner = "Player 1";
+                return winner;
+            })
+        } else if (p2Score > p1Score) {
+            console.log("Player 2 Wins");
+            setWinner(prevPlayer => {
+                winner = "Player 2";
+                return winner;
+            })
+        } else {
+            console.log("Tie");
+            // return alert("Lame. It's a tie!");
+        }
+    }
 
     let p1Dice = {
         diceState: {
@@ -197,6 +160,8 @@ export function BoardProvider ({children}) {
             setP1ColumnC,
             p1DiceArr,
             setP1DiceArr,
+            p1AllVals,
+            setP1AllVals,
             p2ColumnA,
             setP2ColumnA,
             p2ColumnB,
@@ -218,6 +183,10 @@ export function BoardProvider ({children}) {
         removeP2MatchingVals,
         removeP1MatchingVals,
         scoreCheck,
+        checkWinner,
+        winner,
+        setGameOver,
+        gameOver
     }
 
     let p2Dice = {

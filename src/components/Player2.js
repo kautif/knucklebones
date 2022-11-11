@@ -3,7 +3,7 @@ import BoardContext from '../BoardContext';
 
 export default function Player2 (props) {
     const { dice } = useContext(BoardContext);
-    const { setP1Roll, p1Roll, currentDice, p2ColumnA, p2ColumnB, p2ColumnC, setP2Score, p2Score, p1Turn } = dice.p2Dice.diceState;
+    const { setP1Roll, p1Roll, currentDice, p2Score, p1Turn } = dice.p2Dice.diceState;
     const { setRandomVal } = dice.p2Dice;
 
     function handleDiceHolder () {
@@ -18,7 +18,6 @@ export default function Player2 (props) {
             <h1>Player 2</h1>
             <h2>{p2Score}</h2>
             <div className="p2__diceholder" onClick={handleDiceHolder}>
-                {/* <Dice /> */}
                 <h2 className="p2__diceholder__dice">{!p1Turn && currentDice}</h2>
                 {p1Turn && setRandomVal()}
             </div>
