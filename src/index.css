@@ -1,3 +1,27 @@
+@font-face {
+  font-family: catFont;
+  src: url("/public/fonts/OrientalCatsLight-2OzB8.otf");
+}
+
+@font-face {
+  font-family: brushFont;
+  src: url("/public/fonts/BrushHandNew-jGay.ttf");
+}
+
+h2 {
+  font-size: 3.5em;
+  letter-spacing: 7px;
+}
+
+h3 {
+  font-size: 2.5em;
+  letter-spacing: 13px;
+}
+
+h2, h3 {
+  font-family: brushFont;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -8,6 +32,8 @@ body {
 }
 
 .board {
+  background-image: url("../public/filler_bg.png");
+  background-size: 100% 100%;
   position: relative;
 }
 
@@ -17,28 +43,59 @@ body {
   left: 0;
 }
 
+.knucklebones__p2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 .p1__pp,
 .p2__pp {
-  width: 35%;
+  width: 57%;
 }
 
 .p1__diceholder,
 .p2__diceholder {
-    width: 200px;
-    height: 100px;
+    position: absolute;
+    width: 243px;
+    height: 126px;
     border: 2px solid black;
-    margin-left: 12%;
     margin-bottom: 10%;
 }
 
-.p2__diceholder {
-    margin-left: 0;
+.p1__diceholder {
+  background-image: url("../public/diceholder_box.png");
+  background-size: 100% 100%;
+  border: none;
+  top: 18px;
+  left: 11%;
 }
 
-.knucklebones__p2 {
-    position: absolute;
-    top: 0;
-    right: 30px;
+.p2__diceholder {
+  background-image: url("../public/diceholder_box.png");
+  background-size: 100% 100%;
+  border: none;
+  margin-left: 0;
+  top: 18px;
+  right: 11%;
+}
+
+.p1__diceholder__dice, 
+.p2__diceholder__dice {
+  font-size: 1.5em;
+  font-weight: bold;
+  position: absolute;
+  top: 14%;
+  right: 26%;
+}
+
+.p2__diceholder__dice {
+  top: 0;
+}
+
+.p1__diceholder__dice img,
+.p2__diceholder__dice img {
+  width: 75%;
 }
 
 .knucklebones__diceboard__container {
@@ -49,6 +106,25 @@ body {
     flex-direction: column;
     height: 95vh;
     justify-content: space-around;
+    margin-bottom: 7%;
+}
+
+.knucklebones__diceboard__column__container {
+  background-image: url("../public/diceboard_box.png");
+  background-size: 100% 100%;
+
+}
+
+.knucklebones__p1,
+.knucklebones__p2 {
+  background-color: #EEC39A;
+  border-radius: 6px;
+  width: 36%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .knucklebones__diceboard__p1,
@@ -59,8 +135,85 @@ body {
 
 .knucklebones__diceboard__square {
   width: 32%;
-  height: 65px;
+  height: 117px;
   border: 2px solid black;
+  position: relative;
+  font-size: 2em;
+  display: flex;
+  font-weight: bold;
+  color: black;
+  justify-content: center;
+  align-items: center;
+}
+
+.knucklebones__diceboard__square img {
+  width: 60%;
+  margin-left: 7%;
+  margin-top: 2%;
+}
+
+.column_A .knucklebones__diceboard__square {
+  border-left: 0;
+}
+
+.column_C .knucklebones__diceboard__square {
+  border-left: 0;
+  border-right: 0;
+}
+
+.knucklebones__diceboard__square:nth-child(1) {
+  border-top: 0;
+}
+
+.knucklebones__diceboard__square:nth-child(3) {
+  border-bottom: 0;
+}
+
+.knucklebones__diceboards__winner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+}
+
+.knucklebones__diceboards__winner__screen {
+  color: #EEC39A;
+  position: relative;
+  top: 0;
+  width: 58%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.knucklebones__diceboards__winner__score {
+  display: flex;
+  justify-content: space-around;
+}
+
+.knucklebones__diceboards__winner__screen__player {
+  font-family: catFont;
+  font-size: 7em;
+  margin-bottom: 0;
+}
+
+.knucklebones__diceboards__winner__score__p1 h3,
+.knucklebones__diceboards__winner__score__p2 h3 {
+  font-size: 4em;
+    margin-top: 0;
+    margin-bottom: 9%;
+}
+
+.knucklebones__diceboards__winner__newgame {
+    background-color: #EEC39A;
+    font-family: brushFont;
+    font-size: 3.5em;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 code {

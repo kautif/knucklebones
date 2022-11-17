@@ -12,20 +12,6 @@ body {
   margin: 2%;
 }
 
-.p1__diceholder, 
-.p2__diceholder {
-  position: relative;
-}
-
-.p1__diceholder__dice, 
-.p2__diceholder__dice {
-  font-size: 1.5em;
-  font-weight: bold;
-  position: absolute;
-  top: 30%;
-  right: 47%;
-}
-
 .knucklebones__diceboard__square {
   position: relative;
   width: 100%;

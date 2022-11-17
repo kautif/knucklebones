@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import BoardContext from '../BoardContext';
 import DiceBoardSquare from './DiceBoardSquare';
 import $ from 'jquery';
@@ -6,7 +6,10 @@ import Column from './Column';
 
 export default function DiceBoardP1 (props) {
 const { dice } = useContext(BoardContext);
-const { setP1ColumnA, 
+const { setP1Image,
+        simbaHappy,
+        simbaNeutral,
+        setP1ColumnA, 
         p1ColumnA, 
         setP1ColumnB, 
         p1ColumnB, 
@@ -20,9 +23,17 @@ const { setP1ColumnA,
         setP1Turn,
         p1Turn } = dice.p1Dice.diceState;
 
-const { removeP2MatchingVals, removeP1MatchingVals, scoreCheck, reduceScore, checkWinner } = dice.p1Dice;
+const { removeP2MatchingVals, removeP1MatchingVals, scoreCheck, reduceScore, checkWinner, setRandomVal } = dice.p1Dice;
 
-const { setP2ColumnA, 
+useEffect(() => {
+  //if ((props.player === "1" && p1Turn) || (props.player === "2" && !p1Turn))
+    setRandomVal();
+}, [p1Turn, setRandomVal])
+
+const { setP2Image,
+        roseHappy,
+        roseNeutral,
+        setP2ColumnA, 
         p2ColumnA, 
         setP2ColumnB, 
         p2ColumnB, 
@@ -44,7 +55,9 @@ function renderColumn (colLetter, setColumn, playerNum, colArr, setPlayerDice) {
     )    
 }
 
+// don't cause side effects during render phase
 function aggregateColumns () {
+    // setRandomVal();
     if (props.player === "1") {
         return (
             <div className='knucklebones__diceboard__column__container'>
@@ -80,7 +93,7 @@ function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
 
             if (prevColumn !== undefined) {
                 const newColumn = [...prevColumn, currentDice];
-                scoreCheck(newColumn, setP1Score);
+                scoreCheck(newColumn, setP1Score, setP1Image, simbaHappy, simbaNeutral);
 
                 if (column === "A") {
                     removeP2MatchingVals(player, p2ColumnA, setP2ColumnA);
@@ -112,7 +125,7 @@ function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
         setColumn(prevColumn => {
             if (prevColumn !== undefined) {
                 const newColumn = [...prevColumn, currentDice];
-                scoreCheck(newColumn, setP2Score);
+                scoreCheck(newColumn, setP2Score, setP2Image, roseHappy, roseNeutral);
                 // removeMatchingVals(newColumn, setColumn, setP2Score);
                 if (column === "A") {
                     removeP1MatchingVals(player, p1ColumnA, setP1ColumnA);

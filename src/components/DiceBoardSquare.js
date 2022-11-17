@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
+import BoardContext from '../BoardContext';
 
 export default function DiceBoardSquare (props) {
-    useEffect(() => {
-        // console.log("DiceBoardSquare props: ", props);
-    }, [props])
+    const { dice } = useContext(BoardContext);
+    const { setDiceImg } = dice.p1Dice;
     return (
         <div className="knucklebones__diceboard__square">
-            {props.diceVals ? props.diceVals : ""}
+            {props.diceVals ? 
+            <img src={setDiceImg(props.diceVals)} alt={"Dice value of " + props.diceVals} /> : ""}
         </div>
       )
 }
