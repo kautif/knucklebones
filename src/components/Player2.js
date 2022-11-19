@@ -22,7 +22,7 @@ export default function Player2 (props) {
                 {/* {p1Turn && setRandomVal()} */}
                 <img className="p2__pp" src={p2Image} alt="player 2 image" />
                 <h1>Player 2</h1>
-                <h2>Score: {p2Score}</h2>
+                <h2 id="p2__score">Score: {p2Score}</h2>
             </div>
         </div>
     )

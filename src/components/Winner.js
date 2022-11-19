@@ -48,8 +48,17 @@ export default function Winner () {
                 return roseHappy;
             })
         } else {
-            console.log("Tie");
-            // return alert("Lame. It's a tie!");
+            winner = "No one";
+            alt1 = "sad orange cat";
+            alt2 = "sad white cat";
+
+            setP1Image(prevImg => {
+                return simbaSad;
+            })
+
+            setP2Image(prevImg => {
+                return roseSad;
+            })
         }
         setCurrentDice(prevDice => {
             return 0;

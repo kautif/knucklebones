@@ -8,6 +8,10 @@
   src: url("/public/fonts/BrushHandNew-jGay.ttf");
 }
 
+h1 {
+  font-family: catFont;
+}
+
 h2 {
   font-size: 3.5em;
   letter-spacing: 7px;
@@ -31,6 +35,109 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.knucklebones__title {
+  background-color: #6B3B31;
+  padding-top: 3%;
+  padding-bottom: 4%;
+}
+
+.knucklebones__title h1 {
+  font-size: 7em;
+  text-align: center;
+  color: #EEC39A;
+  margin-top: 0;
+}
+
+.knucklebones__title__flex {
+    display: flex;
+    justify-content: space-around;
+    width: 72%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.knucklebones__title__flex img {
+  width: 35%;
+}
+
+.knucklebones__dice-imgs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 23%;
+    justify-content: space-around;
+}
+
+.knucklebones__dice-imgs img {
+  margin-bottom: 5%;
+}
+
+.knucklebones__nav ul {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.knucklebones__nav ul li {
+  display: inline-block;
+  font-size: 1.9em;
+}
+
+.knucklebones__nav__item:hover {
+  box-shadow: 9px 11px 12px 1px;
+  transition: 250ms;
+}
+
+.knucklebones__nav__item a {
+    font-family: 'brushFont';
+    color: black;
+    text-decoration: none;
+    font-size: 1.75em;
+}
+
+li.knucklebones__nav__item {
+  background-color: #EEC39A;
+  padding: 5% 9%;
+  border-radius: 10px;
+}
+
+.knucklebones__rules__container {
+  background-color: #6B3B31;
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 3%;
+}
+
+.knucklebones__rules__container h1 {
+  color: #EEC39A;
+  font-family: catFont;
+  margin-top: 3%;
+  margin-bottom: 0;
+  font-size: 7em;
+}
+
+.knucklebones__rules__flex {
+    display: flex;
+    justify-content: center;
+}
+
+.knucklebones__rules__howto,
+.knucklebones__rules__scoring {
+  width: 45%;
+}
+
+.knucklebones__rules__flex ol {
+  text-align: left;
+}
+
+.knucklebones__rules__flex li {
+    color: #EEC39A;
+    font-family: 'brushFont';
+    font-size: 2em;
+    line-height: 33px;
+}
+
 .board {
   background-image: url("../public/filler_bg.png");
   background-size: 100% 100%;
@@ -49,6 +156,13 @@ body {
   right: 0;
 }
 
+.knucklebones__p1 h1, 
+.knucklebones__p2 h1 {
+  font-size: 5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .p1__pp,
 .p2__pp {
   width: 57%;
@@ -59,21 +173,25 @@ body {
     position: absolute;
     width: 243px;
     height: 126px;
-    border: 2px solid black;
     margin-bottom: 10%;
+    border: 4px solid black;
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px 0px;
 }
 
 .p1__diceholder {
-  background-image: url("../public/diceholder_box.png");
-  background-size: 100% 100%;
+  /* background-image: url("../public/diceholder_box.png");
+  background-size: 100% 100%; */
+  background-color: #EEC39A;
   border: none;
   top: 18px;
   left: 11%;
 }
 
 .p2__diceholder {
-  background-image: url("../public/diceholder_box.png");
-  background-size: 100% 100%;
+  /* background-image: url("../public/diceholder_box.png");
+  background-size: 100% 100%; */
+  background-color: #D89677;
   border: none;
   margin-left: 0;
   top: 18px;
@@ -86,7 +204,7 @@ body {
   font-weight: bold;
   position: absolute;
   top: 14%;
-  right: 26%;
+  right: 19%;
 }
 
 .p2__diceholder__dice {
@@ -104,15 +222,15 @@ body {
     margin-right: auto;
     display: flex;
     flex-direction: column;
-    height: 95vh;
+    height: 75vh;
     justify-content: space-around;
     margin-bottom: 7%;
 }
 
 .knucklebones__diceboard__column__container {
-  background-image: url("../public/diceboard_box.png");
-  background-size: 100% 100%;
-
+  /* background-image: url("../public/diceboard_box.png"); */
+  /* background-size: 100% 100%; */
+  box-shadow: 10px 12px 6px 0px;
 }
 
 .knucklebones__p1,
@@ -133,9 +251,19 @@ body {
   flex-wrap: wrap;
 }
 
+.player1 {
+  background-color: #EEC39A;
+}
+
+.knucklebones__p2,
+.player2 {
+  background-color: #D89677;
+}
+
+
 .knucklebones__diceboard__square {
   width: 32%;
-  height: 117px;
+  height: 93px;
   border: 2px solid black;
   position: relative;
   font-size: 2em;
@@ -152,8 +280,20 @@ body {
   margin-top: 2%;
 }
 
+.column_A {
+  border-radius: 8px 0px 0px 8px;
+}
+
 .column_A .knucklebones__diceboard__square {
   border-left: 0;
+}
+
+.column_B {
+  border-right: 2px solid black;
+}
+
+.column_C {
+  border-radius: 0px 8px 8px 0px;
 }
 
 .column_C .knucklebones__diceboard__square {
@@ -187,24 +327,44 @@ body {
   width: 58%;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+}
+
+#p1__score,
+#p2__score {
+  margin-top: 0;
 }
 
 .knucklebones__diceboards__winner__score {
   display: flex;
   justify-content: space-around;
+  text-align: center;
 }
 
 .knucklebones__diceboards__winner__screen__player {
   font-family: catFont;
   font-size: 7em;
   margin-bottom: 0;
+  margin-top: 4%;
+  text-emphasis: center;
+}
+
+.knucklebones__diceboards__winner__score__p1 img,
+.knucklebones__diceboards__winner__score__p2 img {
+  width: 82%;
+}
+
+.knucklebones__diceboards__winner__score__p1 h2,
+.knucklebones__diceboards__winner__score__p2 h2 {
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .knucklebones__diceboards__winner__score__p1 h3,
 .knucklebones__diceboards__winner__score__p2 h3 {
   font-size: 4em;
-    margin-top: 0;
-    margin-bottom: 9%;
+  margin-top: 0;
+  margin-bottom: 9%;
 }
 
 .knucklebones__diceboards__winner__newgame {
@@ -220,3 +380,298 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (min-width: 1025px) {
+  .p1__diceholder {
+    left: 5%;
+  }
+
+  .p2__diceholder {
+    right: 3%;
+  }
+
+  .knucklebones__diceboard__container {
+    height: 80vh;
+  }
+
+  .knucklebones__diceboard__square {
+    height: 78px;
+  }
+
+  .knucklebones__diceboard__square img {
+    width: 83%;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+/* PLAY */
+
+  .p1__diceholder, .p2__diceholder {
+    width: 100px;
+    height: 77px;
+  }
+
+  .p1__diceholder__dice, .p2__diceholder__dice {
+    top: 14%;
+    right: initial;
+    width: 77%;
+    left: 20%;
+  }
+
+  .p2__diceholder__dice {
+    top: -13%;
+  }
+
+  .knucklebones__diceboard__container {
+    height: 79vh;
+  }
+
+  .knucklebones__diceboard__square {
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 453px) {
+  .knucklebones__title h1 {
+    font-size: 6em;
+  }
+  
+  .knucklebones__nav ul {
+    width: 60%;
+    margin-left: 14%;
+}
+  
+.knucklebones__nav ul li {
+    font-size: 1.25em;
+  }
+
+  /* RULES */
+  .knucklebones__rules__flex {
+    flex-direction: column;
+  }
+
+  .knucklebones__rules__howto, 
+  .knucklebones__rules__scoring {
+    width: 97%;
+  }
+
+  /* PLAY */
+
+  .board {
+    width: 90%;
+  }
+
+  .p1__diceholder, .p2__diceholder {
+    width: 100px;
+    height: 77px;
+  }
+
+  .p1__diceholder {
+    left: 6%;
+  }
+
+  .p2__diceholder {
+    right: 7%;
+  }
+
+  .p1__diceholder__dice, .p2__diceholder__dice {
+    width: 77%;
+  }
+
+  .p1__diceholder__dice {
+    right: initial;
+    left: 21%;
+  }
+
+  .p2__diceholder__dice {
+    right: initial;
+    left: 20%;
+    top: -27%;
+  }
+
+  .p1__pp, .p2__pp {
+    width: 90%;
+  }
+
+
+  .knucklebones__diceboard__container {
+    height: 84vh;
+  }
+
+  .knucklebones__diceboard__square {
+    height: 68px;
+  }
+
+  .knucklebones__diceboard__square img {
+    width: 86%;
+  }
+
+  .knucklebones__p1 h1, .knucklebones__p2 h1 {
+    font-size: 3em;
+  }
+
+  .p1__side h2, .p2__side h2 {
+    font-size: 2.5em;
+  }
+
+  /* WINNER */
+
+  .knucklebones__diceboards__winner__screen {
+    width: 83%;
+    top: 15%;
+  }
+
+  .knucklebones__diceboards__winner__screen__player {
+    font-size: 4em;
+  }
+
+  .knucklebones__diceboards__winner__score__p1 h2,
+  .knucklebones__diceboards__winner__score__p2 h2,
+  .knucklebones__diceboards__winner__score__p1 h3, 
+  .knucklebones__diceboards__winner__score__p2 h3,
+  .knucklebones__diceboards__winner__newgame {
+    font-size: 2.5em;
+  }
+}
+
+@media (max-width: 452px) and (min-width: 320px) {
+  .knucklebones__title h1 {
+    font-size: 4em;
+  }
+
+  .knucklebones__title__flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .knucklebones__title__flex img {
+    width: 93%;
+  }
+
+  .knucklebones__dice-imgs {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .knucklebones__dice-imgs img {
+    width: 32%;
+  }
+
+  .knucklebones__nav ul {
+    width: 40%;
+    margin-left: 21%;
+  }
+
+  .knucklebones__nav ul li {
+    font-size: 1.5em;
+    margin-right: 20%;
+  }
+
+
+  /* RULES */
+  .knucklebones__rules__flex {
+    flex-direction: column;
+  }
+
+  .knucklebones__rules__howto, 
+  .knucklebones__rules__scoring {
+    width: 97%;
+  }
+
+  /* PLAY */ 
+
+  .knucklebones__p1, .knucklebones__p2 {
+    width: 36%;
+    height: 46%;
+  }
+
+  .p1__diceholder, .p2__diceholder {
+    width: 82px;
+    height: 66px;
+  }
+
+  .p1__diceholder {
+    left: 5%;
+  }
+
+  .p2__diceholder {
+    right: 3%;
+  }
+
+  .p1__diceholder__dice, .p2__diceholder__dice {
+    width: 75%;
+  }
+
+  .p1__diceholder__dice {
+    right: initial;
+    left: 21%;
+  }
+
+  .p2__diceholder__dice {
+    top: -11%;
+    right: 5%;
+  }
+
+  .board .knucklebones__nav ul {
+    flex-direction: column;
+    margin-left: 24%;
+  }
+
+  .board .knucklebones__nav ul li {
+    font-size: 1.25em;
+    margin-bottom: 8%;
+    text-align: center;
+  }
+
+  .knucklebones__p1 h1, .knucklebones__p2 h1 {
+    font-size: 2em;
+  }
+
+  .knucklebones__p1 h2, .knucklebones__p2 h2 {
+    font-size: 1.5em;
+  }
+
+  .p1__pp, .p2__pp {
+    width: 94%;
+  }
+
+  .knucklebones__diceboard__container {
+    display: flex;
+    flex-direction: row;
+    height: 71hv;
+  }
+
+  .knucklebones__diceboard__column__container {
+    display: flex;
+    width: 153px;
+    flex-direction: row;
+  }
+
+  .knucklebones__diceboard__square {
+    height: 66px;
+  }
+
+  .knucklebones__diceboard__square img {
+    width: 93%;
+    margin-left: -4%;
+  }
+
+  /* WINNER */ 
+
+  .knucklebones__diceboards__winner__screen__player {
+    font-size: 2.9em;
+  }
+
+  .knucklebones__diceboards__winner__screen {
+    width: 100%;
+    top: 21%;
+  }
+
+  .knucklebones__diceboards__winner__score__p1 h2,
+  .knucklebones__diceboards__winner__score__p2 h2,
+  .knucklebones__diceboards__winner__score__p1 h3, 
+  .knucklebones__diceboards__winner__score__p2 h3,
+  .knucklebones__diceboards__winner__newgame {
+    font-size: 2.5em;
+  }
+} 
