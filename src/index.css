@@ -398,9 +398,12 @@ code {
     margin-bottom: 2%;
   }
 
+  .knucklebones__title h2 {
+    font-size: 2.5em;
+  }
+
   .knucklebones__title__flex {
-    width: initial;
-    aspect-ratio: 3;
+    width: 60%;
     margin-bottom: 3%;
   }
 
@@ -504,6 +507,10 @@ code {
 
   .knucklebones__diceboard__square {
     height: 70px;
+  }
+
+  .knucklebones__diceboard__square img {
+    width: 81%;
   }
 }
 
