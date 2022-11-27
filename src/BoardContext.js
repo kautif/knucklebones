@@ -144,7 +144,7 @@ export function BoardProvider ({children}) {
 
         if (removedTarget.length === 2) {
             setPScore((prevScore) => {
-                return prevScore -= (currentDice * 2) * 2;
+                return prevScore -= currentDice + ((currentDice * 2) * 2);
                 // newScore = prevScore;
                 // return newScore;
             })
@@ -162,7 +162,7 @@ export function BoardProvider ({children}) {
 
         if (removedTarget.length === 3) {
             setPScore((prevScore) => {
-                return prevScore -= (currentDice * 3) * 3;
+                return prevScore -= currentDice + ((currentDice * 2) * 2) + ((currentDice * 3) * 3);
                 // newScore = prevScore;
                 // return newScore
             })
