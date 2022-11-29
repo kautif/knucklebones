@@ -5,11 +5,10 @@ import $ from 'jquery';
 export default function Player1 (props) {
     const { dice } = useContext(BoardContext);
     const { currentDice, p1Score, p1Turn, p1Image } = dice.p1Dice.diceState;
-    const { setRandomVal, setDiceImg } = dice.p1Dice;
+    const { setDiceImg } = dice.sharedFuncs;
     return (
         <div className="p1__side">
             <div className="p1__diceholder">
-                {/* <Dice /> */}
                 <span className="p1__diceholder__dice">{p1Turn && <img src={setDiceImg(currentDice)} alt={`dice with a value of ${currentDice}`}/>}</span>
             </div>
             <div className="knucklebones__p1">

@@ -1,9 +1,9 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import BoardContext from '../BoardContext';
 
 export default function Winner () {
     const { dice } = useContext(BoardContext);
-    const { setRandomVal } = dice.p1Dice;
+    const { setRandomVal } = dice.sharedFuncs;
     const { p1ColumnA, setP1ColumnA, p1ColumnB, 
             setP1ColumnB, p1ColumnC, setP1ColumnC, 
             setP1DiceArr, p1Image, setP1Image, 

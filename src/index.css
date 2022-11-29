@@ -8,6 +8,19 @@
   src: url("/public/fonts/BrushHandNew-jGay.ttf");
 }
 
+.App {
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 h1 {
   font-family: catFont;
 }
@@ -24,15 +37,6 @@ h3 {
 
 h2, h3 {
   font-family: brushFont;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .knucklebones__title {
@@ -154,6 +158,9 @@ li.knucklebones__nav__item {
   background-image: url("../public/filler_bg.png");
   background-size: 100% 100%;
   position: relative;
+  border: 2px solid black;
+  height: 95vh;
+  margin: 2%;
 }
 
 .knucklebones__p1 {
@@ -192,8 +199,6 @@ li.knucklebones__nav__item {
 }
 
 .p1__diceholder {
-  /* background-image: url("../public/diceholder_box.png");
-  background-size: 100% 100%; */
   background-color: #EEC39A;
   border: none;
   top: 18px;
@@ -201,8 +206,6 @@ li.knucklebones__nav__item {
 }
 
 .p2__diceholder {
-  /* background-image: url("../public/diceholder_box.png");
-  background-size: 100% 100%; */
   background-color: #D89677;
   border: none;
   margin-left: 0;
@@ -239,9 +242,15 @@ li.knucklebones__nav__item {
     margin-bottom: 7%;
 }
 
+.knucklebones__diceboard__column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 99;
+}
+
 .knucklebones__diceboard__column__container {
-  /* background-image: url("../public/diceboard_box.png"); */
-  /* background-size: 100% 100%; */
+  display: flex;
   box-shadow: 10px 12px 6px 0px;
 }
 
@@ -274,7 +283,7 @@ li.knucklebones__nav__item {
 
 
 .knucklebones__diceboard__square {
-  width: 32%;
+  width: 100%;
   height: 93px;
   border: 2px solid black;
   position: relative;
@@ -284,6 +293,14 @@ li.knucklebones__nav__item {
   color: black;
   justify-content: center;
   align-items: center;
+}
+
+.knucklebones__diceboard__square span {
+  font-size: 1.5em;
+  position: absolute;
+  top: 20%;
+  left: 44%;
+  font-weight: bold;
 }
 
 .knucklebones__diceboard__square img {

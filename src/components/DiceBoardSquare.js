@@ -1,9 +1,9 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 import BoardContext from '../BoardContext';
 
 export default function DiceBoardSquare (props) {
     const { dice } = useContext(BoardContext);
-    const { setDiceImg } = dice.p1Dice;
+    const { setDiceImg } = dice.sharedFuncs;
     return (
         <div className="knucklebones__diceboard__square">
             {props.diceVals ? 
@@ -11,8 +11,3 @@ export default function DiceBoardSquare (props) {
         </div>
       )
 }
-
-{  /* <div className={"knucklebones__diceboard__square column_" + props.column + " player" + props.player} 
-        onClick={(e) => props.setDiceVal(e)}>
-            <span onClick={(e) => props.setDiceVal(e)}></span>
-</div> */}

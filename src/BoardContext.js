@@ -34,14 +34,8 @@ export function BoardProvider ({children}) {
     let [winner, setWinner] = useState("");
 
     let randomVal;
-
-    // check primitives by values 2 === 2
-    // non-primitives ... checks by references
-
-    // XYZ!@#$%@$^@^111212, QWRT!@%!%@$%!@$%asa
     const setRandomVal = useCallback(() => {
         randomVal = Math.floor(Math.random() * 6) + 1;
-        // setCurrentDice(1);
         setCurrentDice(randomVal);
     }, [])
 
@@ -123,12 +117,9 @@ export function BoardProvider ({children}) {
     }, [currentDice]) 
 
     function reduceScore (setPScore, removedTarget, setPImage, sad, neutral) {
-        // let newScore;
         if (removedTarget.length === 1) {
             setPScore((prevScore) => {
                 return prevScore -= (currentDice);
-                // newScore = prevScore
-                // return newScore;
             })
 
             setPImage(prevImage => {
@@ -145,8 +136,6 @@ export function BoardProvider ({children}) {
         if (removedTarget.length === 2) {
             setPScore((prevScore) => {
                 return prevScore -= currentDice + ((currentDice * 2) * 2);
-                // newScore = prevScore;
-                // return newScore;
             })
 
             setPImage(prevImage => {
@@ -163,8 +152,6 @@ export function BoardProvider ({children}) {
         if (removedTarget.length === 3) {
             setPScore((prevScore) => {
                 return prevScore -= currentDice + ((currentDice * 2) * 2) + ((currentDice * 3) * 3);
-                // newScore = prevScore;
-                // return newScore
             })
 
             setPImage(prevImage => {
@@ -222,23 +209,16 @@ export function BoardProvider ({children}) {
         }
     }
 
-    function checkWinner () {
-        if (p1Score > p2Score) {
-            console.log("Player 1 Wins");
-            setWinner(prevPlayer => {
-                winner = "Player 1";
-                return winner;
-            })
-        } else if (p2Score > p1Score) {
-            console.log("Player 2 Wins");
-            setWinner(prevPlayer => {
-                winner = "Player 2";
-                return winner;
-            })
-        } else {
-            console.log("Tie");
-            // return alert("Lame. It's a tie!");
-        }
+    let sharedFuncs = {
+        setRandomVal,
+        setDiceImg,
+        reduceScore,
+        removeP2MatchingVals,
+        removeP1MatchingVals,
+        scoreCheck,
+        winner,
+        setGameOver,
+        gameOver        
     }
 
     let p1Dice = {
@@ -250,17 +230,7 @@ export function BoardProvider ({children}) {
             p2ColumnB, setP2ColumnB, p2ColumnC, setP2ColumnC,
             p2DiceArr, p1Turn, setP1Turn, p1Roll,
             setP1Roll, p1Score, setP1Score,p2Score, setP2Score
-        },
-        setRandomVal,
-        setDiceImg,
-        reduceScore,
-        removeP2MatchingVals,
-        removeP1MatchingVals,
-        scoreCheck,
-        checkWinner,
-        winner,
-        setGameOver,
-        gameOver
+        }
     }
 
     let p2Dice = {
@@ -295,12 +265,11 @@ export function BoardProvider ({children}) {
             setP1Score,
             p2Score,
             setP2Score
-        },
-        setRandomVal
+        }
     }
 
     return (
-        <BoardContext.Provider value={{dice: { p1Dice, p2Dice}}}>
+        <BoardContext.Provider value={{dice: { p1Dice, p2Dice, sharedFuncs}}}>
             {children}
         </BoardContext.Provider>
     )

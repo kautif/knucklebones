@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '../Nav';
+import Nav from './Nav';
 
 export default function Rules () {
     return (
@@ -11,7 +11,7 @@ export default function Rules () {
                     <h2>How to Play</h2>
                     <ol>
                         <li>Player 1 uses the bottom 3x3 grid. Player 2 uses the top one.</li>
-                        <li>When a 3x3 grid is fully filled in the game ends. </li>
+                        <li>When a 3x3 grid is fully filled in, the game ends. </li>
                         <li>The user with the highest score wins.</li>
                         <li>Place your die in the 1st, 2nd or 3rd column. It will occupy the highest most available row.</li>
                     </ol>

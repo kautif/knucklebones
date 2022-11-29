@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext} from 'react';
+import React from 'react';
 import DiceBoards from './DiceBoards';
 import Player1 from './Player1';
 import Player2 from './Player2';
@@ -12,7 +12,6 @@ export default function GameBoard () {
             <BoardProvider>
                 <Nav />
                 <Player1 />
-                {/* <DiceBoards dice={{p1: p1Dice, p2: p2Dice}} /> */}
                 <DiceBoards  />
                 <Player2 />
             </BoardProvider>
