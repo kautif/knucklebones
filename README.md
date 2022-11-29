@@ -1,72 +1,25 @@
-# knucklebones
+<h1>Knucklebones Clone</h1>
+<h2>Fishybones</h2>
+<p>URL: <a href="https://fishybones.netlify.app">https://fishybones.netlify.app</a></p>
+<img src="https://user-images.githubusercontent.com/22201101/204417309-4f54382f-90e3-4625-afe6-8f3ab405a2b3.png" alt="Fishybones title screen"/>
+<p>Artwork provided by <a href="https://www.twitch.tv/SuperCaptainRob">SuperCaptainRob</a></p>
 
-# Getting Started with Create React App
+<h2>What is Knucklebones?</h2>
+<p>Knucklebones is a minigame in Cult of the Lamb. It was also a game before Cult of the Lamb, but playing Cult of Lamb is how I came to know about it. It's a 2 player game. Each player has a 3x3 grid. Each player drops dice in one of 3 columns. Each die occupies the highest most row of the selected column. And, one's score increases based off of the value of the die added. One's score can also be reduced or multiplied. More can be read about this on the rules page.</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>Rules</h2>
+<img src="https://user-images.githubusercontent.com/22201101/204418393-0fb397ed-5461-4120-a873-c674e9067c2b.png" alt="fishybones rules screenshot"/>
 
-## Available Scripts
+<h2>Play</h2>
+<img src="https://user-images.githubusercontent.com/22201101/204418653-179968d0-38fe-414f-a233-fcf5f66372f3.png" alt="fishybones play screen" />
 
-In the project directory, you can run:
+<h2>Winner</h2>
+<p>Possible Outcomes: Player 1 Wins!, Player 2 Wins!, No One Wins!</p>
+<img src="https://user-images.githubusercontent.com/22201101/204419092-e56d161c-26f7-4fdf-b8a4-efbbaa687bf2.png" alt="fishybones winner screen" />
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h2>Future Features I Could Work On</h2>
+<ul>
+    <li>Update mobile diceboard grids to read horizontally instead of vertically and flip positioning</li>
+    <li>Add sounds for dice, cats, winner, and music</li>
+    <li>Add option to play against CPU (i.e. dropping dice automatically based on some simple rules)</li>
+</ul>
