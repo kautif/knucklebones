@@ -163,6 +163,10 @@ li.knucklebones__nav__item {
   margin: 2%;
 }
 
+.board__mobile-warning {
+  display: none;
+}
+
 .knucklebones__p1 {
   position: absolute;
   bottom: 0;
@@ -641,6 +645,17 @@ code {
 }
 
 @media (max-width: 452px) and (min-width: 320px) {
+  .board__mobile-warning {
+    display: initial;
+    position: absolute;
+    top: 44%;
+    text-align: center;
+    color: #EEC39A;
+    background-color: rgba(0,0,0, 0.5);
+    font-family: 'brushFont';
+    font-size: 1.25em;
+  }
+
   .knucklebones__title h1 {
     font-size: 4em;
   }
@@ -747,7 +762,7 @@ code {
 
   .knucklebones__diceboard__container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     height: 71hv;
   }
 
@@ -755,6 +770,35 @@ code {
     display: flex;
     width: 153px;
     flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .knucklebones__diceboard__column {
+    flex-direction: row;
+  }
+
+  .column_A .knucklebones__diceboard__square {
+    border:  1px solid black;
+}
+
+.column_B .knucklebones__diceboard__square {
+    border:  1px solid black;
+}
+
+.column_C .knucklebones__diceboard__square {
+    border:  1px solid black;
+}
+
+.column_A {
+    border-radius: 8px 8px 0px 0px
+}
+
+.column_C {
+    border-radius: 0px 0px 8px 8px
+}
+
+  .column_B {
+    border: none;
   }
 
   .knucklebones__diceboard__square {

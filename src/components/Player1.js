@@ -1,6 +1,5 @@
 import React, { useContext} from 'react';
 import BoardContext from '../BoardContext';
-import $ from 'jquery';
 
 export default function Player1 (props) {
     const { dice } = useContext(BoardContext);
