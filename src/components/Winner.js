@@ -138,8 +138,7 @@ export default function Winner () {
                             </div>
                         </div> 
     }
-
-    // console.log("winner: ", winner);
+    
     return (
         <div>
             {winner && winScreen}

@@ -19,7 +19,7 @@ const { setP1Image,
         setP1Turn,
         p1Turn } = dice.p1Dice.diceState;
 
-const { removeP2MatchingVals, removeP1MatchingVals, scoreCheck, setRandomVal } = dice.sharedFuncs;
+const { removeMatchingVals, scoreCheck, setRandomVal } = dice.sharedFuncs;
 
 useEffect(() => {
     setRandomVal();
@@ -85,11 +85,11 @@ function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
                 scoreCheck(newColumn, setP1Score, setP1Image, simbaHappy, simbaNeutral);
 
                 if (column === "A") {
-                    removeP2MatchingVals(player, p2ColumnA, setP2ColumnA);
+                    removeMatchingVals(player, p2ColumnA, setP2ColumnA);
                 } else if (column === "B") {
-                    removeP2MatchingVals(player, p2ColumnB, setP2ColumnB);
+                    removeMatchingVals(player, p2ColumnB, setP2ColumnB);
                 } else {
-                    removeP2MatchingVals(player, p2ColumnC, setP2ColumnC);
+                    removeMatchingVals(player, p2ColumnC, setP2ColumnC);
                 }
                 return newColumn;
             }
@@ -113,11 +113,11 @@ function setDiceVal(e, column, player, playerCol, setColumn, setDiceArr) {
                 const newColumn = [...prevColumn, currentDice];
                 scoreCheck(newColumn, setP2Score, setP2Image, roseHappy, roseNeutral);
                 if (column === "A") {
-                    removeP1MatchingVals(player, p1ColumnA, setP1ColumnA);
+                    removeMatchingVals(player, p1ColumnA, setP1ColumnA);
                 } else if (column === "B") {
-                    removeP1MatchingVals(player, p1ColumnB, setP1ColumnB);
+                    removeMatchingVals(player, p1ColumnB, setP1ColumnB);
                 } else {
-                    removeP1MatchingVals(player, p1ColumnC, setP1ColumnC);
+                    removeMatchingVals(player, p1ColumnC, setP1ColumnC);
                 }
                 return newColumn;
             }

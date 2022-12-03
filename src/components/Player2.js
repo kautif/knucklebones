@@ -3,18 +3,12 @@ import BoardContext from '../BoardContext';
 
 export default function Player2 (props) {
     const { dice } = useContext(BoardContext);
-    const { setP1Roll, p1Roll, currentDice, p2Image, p2Score, p1Turn } = dice.p2Dice.diceState;
+    const { currentDice, p2Image, p2Score, p1Turn } = dice.p2Dice.diceState;
     const { setDiceImg } = dice.sharedFuncs;
-
-    function handleDiceHolder () {
-        if (!p1Roll) {
-            setP1Roll(prevRoll => !prevRoll);
-        }
-    }
 
     return (
         <div className="p2__side">
-            <div className="p2__diceholder" onClick={handleDiceHolder}>
+            <div className="p2__diceholder">
                 <h2 className="p2__diceholder__dice">{!p1Turn && <img src={setDiceImg(currentDice)} alt={`dice with a value of ${currentDice}`}/>}</h2>
             </div>
             <div className="knucklebones__p2">

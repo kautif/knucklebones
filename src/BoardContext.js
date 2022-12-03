@@ -116,6 +116,9 @@ export function BoardProvider ({children}) {
         }
     }, [currentDice]) 
 
+    // 12-2-2022
+    //  useMemo calculate score from current board state
+
     function reduceScore (setPScore, removedTarget, setPImage, sad, neutral) {
         if (removedTarget.length === 1) {
             setPScore((prevScore) => {
@@ -166,55 +169,34 @@ export function BoardProvider ({children}) {
         }
     }
 
-    function removeP2MatchingVals (player, p2Column, setP2Column) {
-        let keptVals = [];
-        let removedVals = [];
-
-        if (player === "1") {
-            setP2Column(prevColumn => { return [] })
-            for (let i = 0; i < p2Column.length; i++) {
-                if (currentDice !== p2Column[i]) {
-                    keptVals.push(p2Column[i])
-                } else {
-                    removedVals.push(p2Column[i])
-                }
-            }
-
-            setP2Column(prevCol => {
-                return keptVals;
-            })
-
-            reduceScore(setP2Score, removedVals, setP2Image, roseSad, roseNeutral);
+function removeMatchingVals (player, column, setColumn) {
+    let keptVals = [];
+    let removedVals = [];
+    setColumn(prevColumn => { return [] })
+    for (let i = 0; i < column.length; i++) {
+        if (currentDice !== column[i]) {
+            keptVals.push(column[i])
+        } else {
+            removedVals.push(column[i])
         }
     }
 
-    function removeP1MatchingVals (player, p1Column, setP1Column) {
-        let keptVals = [];
-        let removedVals = [];
-        if (player === "2") {
-            setP1Column(prevColumn => { return [] })
-            for (let i = 0; i < p1Column.length; i++) {
-                if (currentDice !== p1Column[i]) {
-                    keptVals.push(p1Column[i])
-                } else {
-                    removedVals.push(p1Column[i])
-                }
-            }
+    setColumn(prevCol => {
+        return keptVals;
+    })
 
-            setP1Column(prevCol => {
-                return keptVals;
-            })
-
-            reduceScore(setP1Score, removedVals, setP1Image, simbaSad, simbaNeutral);
-        }
+    if (player === "1") {
+        reduceScore(setP2Score, removedVals, setP2Image, roseSad, roseNeutral);
+    } else {
+        reduceScore(setP1Score, removedVals, setP1Image, simbaSad, simbaNeutral);
     }
+}
 
     let sharedFuncs = {
         setRandomVal,
         setDiceImg,
         reduceScore,
-        removeP2MatchingVals,
-        removeP1MatchingVals,
+        removeMatchingVals,
         scoreCheck,
         winner,
         setGameOver,
