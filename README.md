@@ -19,7 +19,7 @@
 
 <h2>Future Features I Could Work On</h2>
 <ul>
-    <li>Update mobile diceboard grids to read horizontally instead of vertically and flip positioning</li>
+    <li>Update mobile diceboard grids to read horizontally instead of vertically and flip positioning (Completed) </li>
     <li>Add sounds for dice, cats, winner, and music</li>
     <li>Add option to play against CPU (i.e. dropping dice automatically based on some simple rules)</li>
 </ul>
