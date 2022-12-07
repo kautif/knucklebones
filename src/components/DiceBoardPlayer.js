@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import BoardContext from '../BoardContext';
 import Column from './Column';
 
-export default function DiceBoardP1 (props) {
+export default function DiceBoardPlayer (props) {
 const { dice } = useContext(BoardContext);
 const { setP1Image,
         simbaHappy,
